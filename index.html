@@ -140,11 +140,26 @@
     .social-link {
       color: var(--gray);
       text-decoration: none;
-      transition: color 0.2s, transform 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 44px; height: 44px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: var(--card);
+      transition: color 0.2s, transform 0.2s, border-color 0.2s,
+                  background 0.2s, box-shadow 0.2s;
     }
 
-    .social-link:hover { color: var(--purple-l); transform: translateY(-2px); }
-    .social-icon { width: 18px; height: 18px; fill: currentColor; }
+    .social-link:hover {
+      color: var(--purple-l);
+      transform: translateY(-4px);
+      border-color: rgba(139,92,246,0.45);
+      background: var(--purple-dim);
+      box-shadow: 0 8px 24px rgba(139,92,246,0.25);
+    }
+
+    .social-icon { width: 22px; height: 22px; fill: currentColor; }
 
     /* ════ MAIN ════ */
     main {
