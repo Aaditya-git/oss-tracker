@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Aaditya Bhilegaonkar</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <style>
     :root {
       --navy:      #0a192f;
@@ -18,7 +18,7 @@
       --green:     #64ffda;
       --green-dim: rgba(100,255,218,.1);
       --sidebar-w: 320px;
-      --font:      'Inter', -apple-system, sans-serif;
+      --font:      'Space Grotesk', -apple-system, sans-serif;
     }
 
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -34,7 +34,6 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    /* ── Background gradient blob ─── */
     body::before {
       content: '';
       position: fixed;
@@ -45,9 +44,7 @@
       z-index: 0;
     }
 
-    /* ════════════════════════════════
-       SIDEBAR
-    ════════════════════════════════ */
+    /* ════════════════ SIDEBAR ════════════════ */
     #sidebar {
       position: fixed;
       top: 0; left: 0;
@@ -62,7 +59,6 @@
 
     .sidebar-top { flex: 1; }
 
-    /* Name */
     .sidebar-name {
       font-size: 1.75rem;
       font-weight: 700;
@@ -79,7 +75,6 @@
       margin-bottom: 14px;
     }
 
-    /* Open to work badge */
     .badge {
       display: inline-flex;
       align-items: center;
@@ -117,7 +112,6 @@
       margin-bottom: 48px;
     }
 
-    /* Nav */
     nav { display: flex; flex-direction: column; gap: 4px; }
 
     .nav-link {
@@ -143,25 +137,14 @@
     }
 
     .nav-link:hover,
-    .nav-link.active {
-      color: var(--slate-ll);
-    }
+    .nav-link.active { color: var(--slate-ll); }
 
     .nav-link:hover .nav-line,
-    .nav-link.active .nav-line {
-      width: 56px;
-      background: var(--slate-ll);
-    }
+    .nav-link.active .nav-line { width: 56px; background: var(--slate-ll); }
 
-    .nav-link.active {
-      color: var(--green);
-    }
+    .nav-link.active { color: var(--green); }
+    .nav-link.active .nav-line { background: var(--green); }
 
-    .nav-link.active .nav-line {
-      background: var(--green);
-    }
-
-    /* Social icons */
     .socials {
       display: flex;
       gap: 20px;
@@ -171,25 +154,14 @@
     .social-link {
       color: var(--slate);
       text-decoration: none;
-      font-size: 0.8rem;
-      letter-spacing: 0.05em;
       transition: color 0.2s, transform 0.2s;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 4px;
     }
 
     .social-link:hover { color: var(--green); transform: translateY(-2px); }
 
-    .social-icon {
-      width: 20px; height: 20px;
-      fill: currentColor;
-    }
+    .social-icon { width: 20px; height: 20px; fill: currentColor; }
 
-    /* ════════════════════════════════
-       MAIN CONTENT
-    ════════════════════════════════ */
+    /* ════════════════ MAIN ════════════════ */
     main {
       margin-left: var(--sidebar-w);
       padding: 96px 80px 160px 80px;
@@ -198,7 +170,6 @@
       z-index: 1;
     }
 
-    /* ── Section ─── */
     section {
       margin-bottom: 120px;
       scroll-margin-top: 96px;
@@ -222,29 +193,18 @@
       background: var(--navy-ll);
     }
 
-    /* ════════════════════════════════
-       ABOUT
-    ════════════════════════════════ */
+    /* ════════════════ ABOUT ════════════════ */
     .about-text {
       font-size: 1rem;
       color: var(--slate);
       line-height: 1.8;
-      margin-bottom: 20px;
+      margin-bottom: 16px;
     }
 
-    .about-text b {
-      color: var(--slate-ll);
-      font-weight: 500;
-    }
-
-    .about-text a {
-      color: var(--green);
-      text-decoration: none;
-    }
-
+    .about-text b { color: var(--slate-ll); font-weight: 500; }
+    .about-text a { color: var(--green); text-decoration: none; }
     .about-text a:hover { text-decoration: underline; }
 
-    /* Stats grid */
     .stats-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
@@ -259,6 +219,7 @@
       padding: 28px 24px;
       background: var(--navy-l);
       text-align: center;
+      transition: background 0.15s;
     }
 
     .stat-box:hover { background: var(--navy-ll); }
@@ -281,7 +242,6 @@
       display: block;
     }
 
-    /* Stack chips */
     .stack {
       display: flex;
       flex-wrap: wrap;
@@ -300,14 +260,12 @@
       letter-spacing: 0.02em;
     }
 
-    /* ════════════════════════════════
-       CONTRIBUTIONS
-    ════════════════════════════════ */
+    /* ════════════════ CONTRIBUTIONS ════════════════ */
     .filters {
       display: flex;
       gap: 8px;
       flex-wrap: wrap;
-      margin-bottom: 40px;
+      margin-bottom: 28px;
     }
 
     .pill {
@@ -321,6 +279,7 @@
       cursor: pointer;
       transition: all 0.15s;
       letter-spacing: 0.03em;
+      font-family: var(--font);
     }
 
     .pill:hover { border-color: var(--green); color: var(--green); }
@@ -331,70 +290,175 @@
       color: var(--green);
     }
 
-    /* Company group */
-    .company-group { margin-bottom: 40px; }
+    /* Company card grid */
+    .company-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(158px, 1fr));
+      gap: 10px;
+    }
 
-    .company-heading {
-      font-size: 0.7rem;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--slate);
-      margin-bottom: 8px;
-      padding-bottom: 8px;
-      border-bottom: 1px solid var(--navy-ll);
+    .co-card {
+      background: var(--navy-l);
+      border: 1px solid var(--navy-ll);
+      border-radius: 12px;
+      padding: 16px;
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s, transform 0.15s;
+      user-select: none;
+    }
+
+    .co-card:hover {
+      border-color: rgba(168,178,216,0.35);
+      transform: translateY(-2px);
+    }
+
+    .co-card.active {
+      border-color: var(--green);
+      background: rgba(100,255,218,0.05);
+    }
+
+    .co-card.dimmed {
+      opacity: 0.35;
+      pointer-events: none;
+    }
+
+    .co-card-top {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      margin-bottom: 12px;
+    }
+
+    .co-logo {
+      width: 26px;
+      height: 26px;
+      border-radius: 6px;
+      background: #fff;
+      object-fit: contain;
+      flex-shrink: 0;
+    }
+
+    .co-name {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--slate-ll);
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .co-meta {
       display: flex;
       align-items: center;
       justify-content: space-between;
     }
 
-    .company-repos-text {
-      font-size: 0.68rem;
-      color: var(--navy-ll);
-      letter-spacing: 0;
-      text-transform: none;
-      font-weight: 400;
+    .co-count {
+      font-size: 0.7rem;
+      color: var(--slate);
     }
 
-    /* Contribution row */
+    .co-dots {
+      display: flex;
+      gap: 3px;
+      align-items: center;
+    }
+
+    .co-dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+    }
+
+    /* Detail panel */
+    .detail-wrap {
+      display: grid;
+      grid-template-rows: 0fr;
+      transition: grid-template-rows 0.32s cubic-bezier(0.4,0,0.2,1),
+                  margin-top 0.32s ease;
+      margin-top: 0;
+    }
+
+    .detail-wrap.open {
+      grid-template-rows: 1fr;
+      margin-top: 12px;
+    }
+
+    .detail-inner { overflow: hidden; }
+
+    .detail-panel {
+      background: var(--navy-l);
+      border: 1px solid var(--navy-ll);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .detail-head {
+      padding: 14px 20px;
+      border-bottom: 1px solid var(--navy-ll);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .detail-head-logo {
+      width: 18px; height: 18px;
+      border-radius: 4px;
+      background: #fff;
+      object-fit: contain;
+    }
+
+    .detail-head-name {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--slate-ll);
+    }
+
+    .detail-head-repos {
+      font-size: 0.7rem;
+      color: var(--slate);
+      margin-left: auto;
+      font-family: 'SF Mono', ui-monospace, monospace;
+    }
+
+    /* Contribution rows (inside panel) */
     .contrib {
       display: grid;
-      grid-template-columns: 16px 80px 1fr auto;
+      grid-template-columns: 12px 76px 1fr auto;
       align-items: center;
       gap: 16px;
-      padding: 14px 16px;
-      margin: 0 -16px;
-      border-radius: 8px;
+      padding: 13px 20px;
       text-decoration: none;
       color: inherit;
       transition: background 0.15s;
+      border-bottom: 1px solid var(--navy-ll);
     }
 
-    .contrib:hover {
-      background: var(--navy-l);
-    }
+    .contrib:last-child { border-bottom: none; }
 
+    .contrib:hover { background: var(--navy-ll); }
     .contrib:hover .contrib-title { color: var(--green); }
     .contrib:hover .contrib-arrow { opacity: 1; transform: translate(3px,-3px); }
 
     .sdot {
-      width: 8px; height: 8px;
+      width: 7px; height: 7px;
       border-radius: 50%;
       justify-self: center;
     }
 
-    .s-open    { background: #4ade80; box-shadow: 0 0 8px #4ade8066; }
-    .s-claimed { background: #fbbf24; box-shadow: 0 0 8px #fbbf2466; }
-    .s-merged  { background: var(--green); box-shadow: 0 0 8px rgba(100,255,218,.4); }
+    .s-open    { background: #4ade80; box-shadow: 0 0 7px #4ade8066; }
+    .s-claimed { background: #fbbf24; box-shadow: 0 0 7px #fbbf2466; }
+    .s-merged  { background: var(--green); box-shadow: 0 0 7px rgba(100,255,218,.4); }
     .s-closed  { background: var(--navy-ll); }
 
     .contrib-label {
-      font-size: 0.72rem;
+      font-size: 0.7rem;
       font-family: 'SF Mono', ui-monospace, monospace;
       color: var(--slate);
     }
 
     .contrib-title {
-      font-size: 0.92rem;
+      font-size: 0.9rem;
       font-weight: 400;
       color: var(--slate-l);
       white-space: nowrap;
@@ -406,14 +470,14 @@
     .contrib-right {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 8px;
     }
 
     .contrib-lang {
-      font-size: 0.7rem;
-      padding: 3px 10px;
+      font-size: 0.68rem;
+      padding: 3px 9px;
       border-radius: 99px;
-      background: var(--navy-l);
+      background: var(--navy);
       border: 1px solid var(--navy-ll);
       color: var(--slate);
       white-space: nowrap;
@@ -428,9 +492,14 @@
 
     .contrib.hidden { display: none; }
 
-    /* ════════════════════════════════
-       CONTACT
-    ════════════════════════════════ */
+    .no-items {
+      padding: 20px;
+      font-size: 0.82rem;
+      color: var(--slate);
+      text-align: center;
+    }
+
+    /* ════════════════ CONTACT ════════════════ */
     .contact-heading {
       font-size: 2.8rem;
       font-weight: 700;
@@ -454,6 +523,7 @@
       gap: 10px;
       font-size: 0.85rem;
       font-weight: 600;
+      font-family: var(--font);
       letter-spacing: 0.08em;
       text-transform: uppercase;
       color: var(--green);
@@ -469,9 +539,7 @@
       transform: translateY(-2px);
     }
 
-    /* ════════════════════════════════
-       MOBILE
-    ════════════════════════════════ */
+    /* ════════════════ MOBILE ════════════════ */
     @media (max-width: 860px) {
       :root { --sidebar-w: 0px; }
 
@@ -484,29 +552,26 @@
       }
 
       nav { flex-direction: row; flex-wrap: wrap; gap: 8px; margin-top: 32px; }
-
       .nav-link { font-size: 0.7rem; gap: 8px; }
       .nav-line { display: none; }
-
       .socials { margin-top: 24px; }
 
       main { margin-left: 0; padding: 48px 28px 100px; }
 
       .stats-grid { grid-template-columns: repeat(2, 1fr); }
-
       .contact-heading { font-size: 2rem; }
+      .company-grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
 
       .contrib {
-        grid-template-columns: 16px 1fr auto;
+        grid-template-columns: 12px 1fr auto;
       }
-
       .contrib-label { display: none; }
     }
   </style>
 </head>
 <body>
 
-<!-- ══ SIDEBAR ══════════════════════════ -->
+<!-- SIDEBAR -->
 <aside id="sidebar">
   <div class="sidebar-top">
     <h1 class="sidebar-name">Aaditya<br>Bhilegaonkar</h1>
@@ -518,7 +583,7 @@
     </span>
 
     <p class="sidebar-bio">
-      Building data pipelines and infrastructure that turn raw data into reliable, scalable systems.
+      Building pipelines and data infrastructure that organizations can rely on.
     </p>
 
     <nav id="nav">
@@ -537,25 +602,19 @@
   <div>
     <div class="socials">
       <a class="social-link" href="https://github.com/Aaditya-git" target="_blank" rel="noopener" title="GitHub">
-        <svg class="social-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-          <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
-        </svg>
+        <svg class="social-icon" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
       </a>
-      <a class="social-link" href="https://linkedin.com" target="_blank" rel="noopener" title="LinkedIn">
-        <svg class="social-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-          <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-        </svg>
+      <a class="social-link" href="https://linkedin.com/in/aaditya-bhilegaonkar" target="_blank" rel="noopener" title="LinkedIn">
+        <svg class="social-icon" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
       </a>
       <a class="social-link" href="mailto:aadityabhilegaonkar@gmail.com" title="Email">
-        <svg class="social-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-          <path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 010 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.91 1.528-1.145C21.69 2.28 24 3.434 24 5.457z"/>
-        </svg>
+        <svg class="social-icon" viewBox="0 0 24 24"><path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 010 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.91 1.528-1.145C21.69 2.28 24 3.434 24 5.457z"/></svg>
       </a>
     </div>
   </div>
 </aside>
 
-<!-- ══ MAIN ═════════════════════════════ -->
+<!-- MAIN -->
 <main>
 
   <!-- ABOUT -->
@@ -563,15 +622,11 @@
     <div class="section-label">About</div>
 
     <p class="about-text">
-      I am a <b>Data Engineer</b> who builds pipelines, orchestration systems, and data infrastructure that organizations can actually rely on. I care about data quality, system reliability, and writing code that the next engineer can understand.
+      I'm a <b>Data Engineer</b> who builds pipelines, orchestration systems, and infrastructure that teams can trust. I care about data quality, reliability, and code that the next engineer can actually follow.
     </p>
 
     <p class="about-text">
-      Right now I am contributing to open source tools across the data engineering ecosystem, from <b>Astronomer</b> and <b>Tesla</b> to <b>Amazon</b>, <b>Netflix</b>, and beyond. It is the fastest way to work alongside world-class engineers, ship real code to production systems, and learn how the tools I use every day actually work under the hood.
-    </p>
-
-    <p class="about-text">
-      I am <b>actively looking for my next role</b> as a data engineer at a company where data is treated as infrastructure, not an afterthought.
+      Right now I'm shipping open source contributions to repos at <b>Astronomer</b>, <b>Tesla</b>, <b>Amazon</b>, <b>Netflix</b>, and more. It's the fastest way to work alongside world-class engineers and understand the tools I use every day from the inside.
     </p>
 
     <div class="stats-grid">
@@ -619,7 +674,13 @@
       <button class="pill" data-filter="closed">Closed</button>
     </div>
 
-    <div id="contrib-list"></div>
+    <div class="company-grid" id="company-grid"></div>
+
+    <div class="detail-wrap" id="detail-wrap">
+      <div class="detail-inner">
+        <div class="detail-panel" id="detail-panel"></div>
+      </div>
+    </div>
   </section>
 
   <!-- CONTACT -->
@@ -629,12 +690,11 @@
     <h2 class="contact-heading">Let's work<br>together.</h2>
 
     <p class="contact-sub">
-      I am open to full-time data engineering roles. If your team is building something ambitious with data, I want to hear about it. Send me an email and I will get back to you within 24 hours.
+      I'm open to full-time data engineering roles. If your team is building something ambitious with data, I want to hear about it.
     </p>
 
     <a class="btn" href="mailto:aadityabhilegaonkar@gmail.com">
-      Say hello
-      <span>&#8599;</span>
+      Say hello <span>&#8599;</span>
     </a>
   </section>
 
@@ -643,154 +703,200 @@
 <script>
 const companies = [
   {
-    name:'Astronomer', color:'#64ffda',
-    repos:'dag-factory, astronomer-cosmos, astro-cli',
-    items:[
-      {label:'PR #753',  title:'Operator aliases in YAML configs',        repo:'dag-factory',       status:'open',    url:'https://github.com/astronomer/dag-factory/pull/753',        lang:'Python'},
-      {label:'PR #2734', title:'Reduce build_airflow_graph complexity',   repo:'astronomer-cosmos', status:'open',    url:'https://github.com/astronomer/astronomer-cosmos/pull/2734',  lang:'Python'},
-      {label:'PR #2747', title:'Log redacted profile on cache miss',      repo:'astronomer-cosmos', status:'open',    url:'https://github.com/astronomer/astronomer-cosmos/pull/2747',  lang:'Python'},
-      {label:'PR #2735', title:'Unify postgres profiles in dbt examples', repo:'astronomer-cosmos', status:'closed',  url:'https://github.com/astronomer/astronomer-cosmos/pull/2735',  lang:'Python'},
-      {label:'PR #2159', title:'Shared constants for dev mode strings',   repo:'astro-cli',         status:'open',    url:'https://github.com/astronomer/astro-cli/pull/2159',           lang:'Go'},
-      {label:'PR #2160', title:'Remove duplicate mock resets',            repo:'astro-cli',         status:'open',    url:'https://github.com/astronomer/astro-cli/pull/2160',           lang:'Go'},
+    name: 'Astronomer', domain: 'astronomer.io',
+    repos: 'dag-factory, astronomer-cosmos, astro-cli',
+    items: [
+      { label:'PR #753',  title:'Operator aliases in YAML configs',      repo:'dag-factory',       status:'open',   url:'https://github.com/astronomer/dag-factory/pull/753',       lang:'Python' },
+      { label:'PR #2734', title:'Reduce build_airflow_graph complexity', repo:'astronomer-cosmos', status:'open',   url:'https://github.com/astronomer/astronomer-cosmos/pull/2734', lang:'Python' },
+      { label:'PR #2747', title:'Log redacted profile on cache miss',    repo:'astronomer-cosmos', status:'open',   url:'https://github.com/astronomer/astronomer-cosmos/pull/2747', lang:'Python' },
+      { label:'PR #2735', title:'Unify postgres profiles in dbt examples',repo:'astronomer-cosmos',status:'closed', url:'https://github.com/astronomer/astronomer-cosmos/pull/2735', lang:'Python' },
+      { label:'PR #2159', title:'Shared constants for dev mode strings', repo:'astro-cli',         status:'open',   url:'https://github.com/astronomer/astro-cli/pull/2159',          lang:'Go'     },
+      { label:'PR #2160', title:'Remove duplicate mock resets',          repo:'astro-cli',         status:'open',   url:'https://github.com/astronomer/astro-cli/pull/2160',          lang:'Go'     },
     ]
   },
   {
-    name:'Tesla', color:'#ef4444',
-    repos:'fleet-telemetry',
-    items:[
-      {label:'#340', title:'Example config for MQTT over SSL',  repo:'fleet-telemetry', status:'claimed', url:'https://github.com/teslamotors/fleet-telemetry/issues/340', lang:'Go'},
-      {label:'#354', title:'Configurable Partition Strategy',   repo:'fleet-telemetry', status:'claimed', url:'https://github.com/teslamotors/fleet-telemetry/issues/354', lang:'Go'},
-      {label:'#273', title:'AWS SQS/SNS dispatcher',            repo:'fleet-telemetry', status:'claimed', url:'https://github.com/teslamotors/fleet-telemetry/issues/273', lang:'Go'},
+    name: 'Tesla', domain: 'tesla.com',
+    repos: 'fleet-telemetry',
+    items: [
+      { label:'#340', title:'Example config for MQTT over SSL', repo:'fleet-telemetry', status:'claimed', url:'https://github.com/teslamotors/fleet-telemetry/issues/340', lang:'Go' },
+      { label:'#354', title:'Configurable Partition Strategy',  repo:'fleet-telemetry', status:'claimed', url:'https://github.com/teslamotors/fleet-telemetry/issues/354', lang:'Go' },
+      { label:'#273', title:'AWS SQS/SNS dispatcher',           repo:'fleet-telemetry', status:'claimed', url:'https://github.com/teslamotors/fleet-telemetry/issues/273', lang:'Go' },
     ]
   },
   {
-    name:'Amazon / AWS', color:'#f97316',
-    repos:'aws-sdk-pandas',
-    items:[
-      {label:'#3173', title:'to_iceberg: conditional merge',          repo:'aws-sdk-pandas', status:'claimed', url:'https://github.com/aws/aws-sdk-pandas/issues/3173', lang:'Python'},
-      {label:'#3191', title:'EMR create_cluster bootstrap arguments', repo:'aws-sdk-pandas', status:'claimed', url:'https://github.com/aws/aws-sdk-pandas/issues/3191', lang:'Python'},
-      {label:'#2845', title:'athena.to_parquet overwrite_partitions', repo:'aws-sdk-pandas', status:'claimed', url:'https://github.com/aws/aws-sdk-pandas/issues/2845', lang:'Python'},
+    name: 'Amazon / AWS', domain: 'aws.amazon.com',
+    repos: 'aws-sdk-pandas',
+    items: [
+      { label:'#3173', title:'to_iceberg: conditional merge',          repo:'aws-sdk-pandas', status:'claimed', url:'https://github.com/aws/aws-sdk-pandas/issues/3173', lang:'Python' },
+      { label:'#3191', title:'EMR create_cluster bootstrap arguments', repo:'aws-sdk-pandas', status:'claimed', url:'https://github.com/aws/aws-sdk-pandas/issues/3191', lang:'Python' },
+      { label:'#2845', title:'athena.to_parquet overwrite_partitions', repo:'aws-sdk-pandas', status:'claimed', url:'https://github.com/aws/aws-sdk-pandas/issues/2845', lang:'Python' },
     ]
   },
   {
-    name:'Netflix', color:'#ef4444',
-    repos:'metaflow',
-    items:[
-      {label:'#3162', title:'Fix MetaflowTaggingError formatting + tests', repo:'metaflow', status:'claimed', url:'https://github.com/Netflix/metaflow/issues/3162', lang:'Python'},
-      {label:'#3163', title:'Test coverage for plugins module',            repo:'metaflow', status:'claimed', url:'https://github.com/Netflix/metaflow/issues/3163', lang:'Python'},
+    name: 'Netflix', domain: 'netflix.com',
+    repos: 'metaflow',
+    items: [
+      { label:'#3162', title:'Fix MetaflowTaggingError formatting + tests', repo:'metaflow', status:'claimed', url:'https://github.com/Netflix/metaflow/issues/3162', lang:'Python' },
+      { label:'#3163', title:'Test coverage for plugins module',             repo:'metaflow', status:'claimed', url:'https://github.com/Netflix/metaflow/issues/3163', lang:'Python' },
     ]
   },
   {
-    name:'Airbyte', color:'#3b82f6',
-    repos:'airbyte',
-    items:[
-      {label:'#33874', title:'Fix broken links in docs',           repo:'airbyte', status:'claimed', url:'https://github.com/airbytehq/airbyte/issues/33874', lang:'Python'},
-      {label:'#44038', title:'LinkedIn Ads: organizations stream', repo:'airbyte', status:'claimed', url:'https://github.com/airbytehq/airbyte/issues/44038', lang:'Python'},
+    name: 'Airbyte', domain: 'airbyte.com',
+    repos: 'airbyte',
+    items: [
+      { label:'#33874', title:'Fix broken links in docs',           repo:'airbyte', status:'claimed', url:'https://github.com/airbytehq/airbyte/issues/33874', lang:'Python' },
+      { label:'#44038', title:'LinkedIn Ads: organizations stream', repo:'airbyte', status:'claimed', url:'https://github.com/airbytehq/airbyte/issues/44038', lang:'Python' },
     ]
   },
   {
-    name:'Trino / Starburst', color:'#f59e0b',
-    repos:'trino',
-    items:[
-      {label:'#28765', title:'Document truncate(number, position)', repo:'trino', status:'claimed', url:'https://github.com/trinodb/trino/issues/28765', lang:'Java'},
-      {label:'#28687', title:'Update default Cassandra to 4.x',    repo:'trino', status:'claimed', url:'https://github.com/trinodb/trino/issues/28687', lang:'Java'},
+    name: 'Trino', domain: 'trino.io',
+    repos: 'trino',
+    items: [
+      { label:'#28765', title:'Document truncate(number, position)', repo:'trino', status:'claimed', url:'https://github.com/trinodb/trino/issues/28765', lang:'Java' },
+      { label:'#28687', title:'Update default Cassandra to 4.x',    repo:'trino', status:'claimed', url:'https://github.com/trinodb/trino/issues/28687', lang:'Java' },
     ]
   },
   {
-    name:'Apache Iceberg', color:'#06b6d4',
-    repos:'iceberg',
-    items:[
-      {label:'#15916', title:'Clarify Spark branch write precedence docs', repo:'iceberg', status:'claimed', url:'https://github.com/apache/iceberg/issues/15916', lang:'Python'},
+    name: 'Apache Iceberg', domain: 'iceberg.apache.org',
+    repos: 'iceberg',
+    items: [
+      { label:'#15916', title:'Clarify Spark branch write precedence docs', repo:'iceberg', status:'claimed', url:'https://github.com/apache/iceberg/issues/15916', lang:'Python' },
     ]
   },
   {
-    name:'Meltano', color:'#a855f7',
-    repos:'meltano',
-    items:[
-      {label:'#7327', title:'Add json-schema-for-humans schema doc', repo:'meltano', status:'claimed', url:'https://github.com/meltano/meltano/issues/7327', lang:'Python'},
+    name: 'Meltano', domain: 'meltano.com',
+    repos: 'meltano',
+    items: [
+      { label:'#7327', title:'Add json-schema-for-humans schema doc', repo:'meltano', status:'claimed', url:'https://github.com/meltano/meltano/issues/7327', lang:'Python' },
     ]
   },
   {
-    name:'Apache Beam', color:'#22c55e',
-    repos:'beam',
-    items:[
-      {label:'#35935', title:'Update Python slowly updating side input', repo:'beam', status:'claimed', url:'https://github.com/apache/beam/issues/35935', lang:'Python'},
+    name: 'Apache Beam', domain: 'beam.apache.org',
+    repos: 'beam',
+    items: [
+      { label:'#35935', title:'Update Python slowly updating side input', repo:'beam', status:'claimed', url:'https://github.com/apache/beam/issues/35935', lang:'Python' },
     ]
   },
   {
-    name:'Apache Airflow', color:'#017cee',
-    repos:'airflow',
-    items:[
-      {label:'#67336', title:'Dashboard wrong % when state count exceeds cap', repo:'airflow', status:'claimed', url:'https://github.com/apache/airflow/issues/67336', lang:'Python'},
+    name: 'Apache Airflow', domain: 'airflow.apache.org',
+    repos: 'airflow',
+    items: [
+      { label:'#67336', title:'Dashboard wrong % when state exceeds cap', repo:'airflow', status:'claimed', url:'https://github.com/apache/airflow/issues/67336', lang:'Python' },
     ]
   },
   {
-    name:'Kestra', color:'#8b5cf6',
-    repos:'kestra',
-    items:[
-      {label:'#15987', title:'Log Kestra UI URL when server is ready', repo:'kestra', status:'claimed', url:'https://github.com/kestra-io/kestra/issues/15987', lang:'Java'},
+    name: 'Kestra', domain: 'kestra.io',
+    repos: 'kestra',
+    items: [
+      { label:'#15987', title:'Log Kestra UI URL when server is ready', repo:'kestra', status:'claimed', url:'https://github.com/kestra-io/kestra/issues/15987', lang:'Java' },
     ]
   },
 ];
 
-const dotClass = {open:'s-open', claimed:'s-claimed', merged:'s-merged', closed:'s-closed'};
-const contribList = document.getElementById('contrib-list');
+const dotClass = { open:'s-open', claimed:'s-claimed', merged:'s-merged', closed:'s-closed' };
+const dotColor  = { open:'#4ade80', claimed:'#fbbf24', merged:'#64ffda', closed:'#233554' };
 
-// Render contributions
-companies.forEach(company => {
-  const group = document.createElement('div');
-  group.className = 'company-group';
+const grid   = document.getElementById('company-grid');
+const wrap   = document.getElementById('detail-wrap');
+const panel  = document.getElementById('detail-panel');
 
-  group.innerHTML = `
-    <div class="company-heading">
-      <span>${company.name}</span>
-      <span class="company-repos-text">${company.repos}</span>
-    </div>`;
+let activeFilter = 'all';
+let activeCompany = null;
 
-  company.items.forEach(item => {
-    const a = document.createElement('a');
-    a.className = 'contrib';
-    a.href = item.url;
-    a.target = '_blank';
-    a.rel = 'noopener';
-    a.dataset.status = item.status;
+function faviconUrl(domain) {
+  return `https://www.google.com/s2/favicons?domain=${domain}&sz=32`;
+}
 
-    a.innerHTML = `
-      <span class="sdot ${dotClass[item.status]}"></span>
-      <span class="contrib-label">${item.label}</span>
-      <span class="contrib-title">${item.title}</span>
-      <span class="contrib-right">
-        <span class="contrib-lang">${item.lang}</span>
-        <span class="contrib-arrow">&#8599;</span>
-      </span>`;
+function matchesFilter(item) {
+  return activeFilter === 'all' || item.status === activeFilter;
+}
 
-    group.appendChild(a);
+function renderGrid() {
+  grid.innerHTML = '';
+  companies.forEach((company, idx) => {
+    const visibleItems = company.items.filter(matchesFilter);
+    const card = document.createElement('div');
+    card.className = 'co-card' + (activeCompany === idx ? ' active' : '') + (visibleItems.length === 0 ? ' dimmed' : '');
+    card.dataset.idx = idx;
+
+    const dots = company.items.map(i =>
+      `<span class="co-dot" style="background:${dotColor[i.status]}"></span>`
+    ).join('');
+
+    card.innerHTML = `
+      <div class="co-card-top">
+        <img class="co-logo" src="${faviconUrl(company.domain)}" alt="${company.name}" loading="lazy" />
+        <span class="co-name">${company.name}</span>
+      </div>
+      <div class="co-meta">
+        <span class="co-count">${company.items.length} item${company.items.length !== 1 ? 's' : ''}</span>
+        <div class="co-dots">${dots}</div>
+      </div>`;
+
+    if (visibleItems.length > 0) {
+      card.addEventListener('click', () => toggleCompany(idx));
+    }
+
+    grid.appendChild(card);
   });
+}
 
-  contribList.appendChild(group);
-});
+function renderPanel(idx) {
+  const company = companies[idx];
+  const visibleItems = company.items.filter(matchesFilter);
 
-// Filter
+  const rows = visibleItems.length === 0
+    ? `<div class="no-items">No ${activeFilter} items for this company.</div>`
+    : visibleItems.map(item => `
+        <a class="contrib" href="${item.url}" target="_blank" rel="noopener" data-status="${item.status}">
+          <span class="sdot ${dotClass[item.status]}"></span>
+          <span class="contrib-label">${item.label}</span>
+          <span class="contrib-title">${item.title}</span>
+          <span class="contrib-right">
+            <span class="contrib-lang">${item.lang}</span>
+            <span class="contrib-arrow">&#8599;</span>
+          </span>
+        </a>`).join('');
+
+  panel.innerHTML = `
+    <div class="detail-head">
+      <img class="detail-head-logo" src="${faviconUrl(company.domain)}" alt="${company.name}" />
+      <span class="detail-head-name">${company.name}</span>
+      <span class="detail-head-repos">${company.repos}</span>
+    </div>
+    ${rows}`;
+}
+
+function toggleCompany(idx) {
+  if (activeCompany === idx) {
+    activeCompany = null;
+    wrap.classList.remove('open');
+  } else {
+    activeCompany = idx;
+    renderPanel(idx);
+    wrap.classList.add('open');
+    setTimeout(() => wrap.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 50);
+  }
+  renderGrid();
+}
+
+// Filter pills
 document.querySelectorAll('.pill').forEach(pill => {
   pill.addEventListener('click', () => {
-    const f = pill.dataset.filter;
+    activeFilter = pill.dataset.filter;
     document.querySelectorAll('.pill').forEach(p => p.classList.remove('active'));
     pill.classList.add('active');
-
-    document.querySelectorAll('.contrib').forEach(row => {
-      row.classList.toggle('hidden', f !== 'all' && row.dataset.status !== f);
-    });
-
-    document.querySelectorAll('.company-group').forEach(g => {
-      const anyVisible = [...g.querySelectorAll('.contrib')].some(r => !r.classList.contains('hidden'));
-      g.style.display = anyVisible ? '' : 'none';
-    });
+    renderGrid();
+    if (activeCompany !== null) renderPanel(activeCompany);
   });
 });
 
+// Initial render
+renderGrid();
+
 // Active nav on scroll
-const sections = document.querySelectorAll('section[id]');
-const navLinks = document.querySelectorAll('.nav-link');
+const sections  = document.querySelectorAll('section[id]');
+const navLinks  = document.querySelectorAll('.nav-link');
 
 const observer = new IntersectionObserver(entries => {
   entries.forEach(entry => {
@@ -804,7 +910,6 @@ const observer = new IntersectionObserver(entries => {
 
 sections.forEach(s => observer.observe(s));
 
-// Smooth scroll for nav
 navLinks.forEach(link => {
   link.addEventListener('click', e => {
     e.preventDefault();
