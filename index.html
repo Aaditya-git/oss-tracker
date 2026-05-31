@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aaditya's OSS Contributions</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #0d1117;
+      color: #e6edf3;
+      min-height: 100vh;
+      padding: 40px 20px;
+    }
+
+    .header {
+      max-width: 900px;
+      margin: 0 auto 48px;
+    }
+
+    .header h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #f0f6fc;
+      margin-bottom: 8px;
+    }
+
+    .header p {
+      color: #8b949e;
+      font-size: 0.95rem;
+    }
+
+    .stats-row {
+      display: flex;
+      gap: 16px;
+      margin-top: 24px;
+      flex-wrap: wrap;
+    }
+
+    .stat {
+      background: #161b22;
+      border: 1px solid #30363d;
+      border-radius: 10px;
+      padding: 16px 24px;
+      text-align: center;
+      min-width: 120px;
+    }
+
+    .stat-number {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #f0f6fc;
+    }
+
+    .stat-label {
+      font-size: 0.75rem;
+      color: #8b949e;
+      margin-top: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .company-section {
+      max-width: 900px;
+      margin: 0 auto 40px;
+    }
+
+    .company-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 16px;
+    }
+
+    .company-logo {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 0.85rem;
+      flex-shrink: 0;
+    }
+
+    .company-name {
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: #f0f6fc;
+    }
+
+    .company-meta {
+      font-size: 0.8rem;
+      color: #8b949e;
+      margin-top: 2px;
+    }
+
+    .contribution-list {
+      border: 1px solid #30363d;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .contribution-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      padding: 16px 20px;
+      border-bottom: 1px solid #21262d;
+      transition: background 0.15s;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .contribution-item:last-child {
+      border-bottom: none;
+    }
+
+    .contribution-item:hover {
+      background: #161b22;
+    }
+
+    .pr-number {
+      font-size: 0.8rem;
+      color: #8b949e;
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      min-width: 52px;
+      margin-top: 2px;
+    }
+
+    .contribution-body {
+      flex: 1;
+    }
+
+    .contribution-title {
+      font-size: 0.95rem;
+      color: #e6edf3;
+      font-weight: 500;
+      margin-bottom: 4px;
+    }
+
+    .contribution-desc {
+      font-size: 0.8rem;
+      color: #8b949e;
+      line-height: 1.5;
+    }
+
+    .contribution-meta {
+      display: flex;
+      gap: 8px;
+      margin-top: 8px;
+      flex-wrap: wrap;
+    }
+
+    .tag {
+      font-size: 0.7rem;
+      padding: 2px 8px;
+      border-radius: 20px;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+    }
+
+    .tag-lang {
+      background: #1f2a37;
+      color: #79c0ff;
+      border: 1px solid #1f6feb;
+    }
+
+    .tag-type {
+      background: #1b2a1b;
+      color: #56d364;
+      border: 1px solid #238636;
+    }
+
+    .tag-type-bug {
+      background: #2d1515;
+      color: #ff7b72;
+      border: 1px solid #6e1c1c;
+    }
+
+    .tag-type-docs {
+      background: #1e2a3a;
+      color: #79c0ff;
+      border: 1px solid #1f4a8a;
+    }
+
+    .status-badge {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 20px;
+      flex-shrink: 0;
+      margin-top: 2px;
+      white-space: nowrap;
+    }
+
+    .status-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+    }
+
+    .status-open {
+      background: #0d2a0d;
+      color: #56d364;
+      border: 1px solid #238636;
+    }
+    .status-open .status-dot { background: #56d364; }
+
+    .status-closed {
+      background: #2d1c2d;
+      color: #bc8cff;
+      border: 1px solid #6e40c9;
+    }
+    .status-closed .status-dot { background: #bc8cff; }
+
+    .status-claimed {
+      background: #271d0c;
+      color: #e3b341;
+      border: 1px solid #9e6a03;
+    }
+    .status-claimed .status-dot { background: #e3b341; }
+
+    .status-merged {
+      background: #1a0d2e;
+      color: #a371f7;
+      border: 1px solid #6e40c9;
+    }
+    .status-merged .status-dot { background: #a371f7; }
+
+    .divider {
+      max-width: 900px;
+      margin: 0 auto 40px;
+      border: none;
+      border-top: 1px solid #21262d;
+    }
+
+    .section-label {
+      max-width: 900px;
+      margin: 0 auto 20px;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #8b949e;
+      font-weight: 600;
+    }
+
+    .legend {
+      max-width: 900px;
+      margin: 0 auto 40px;
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.78rem;
+      color: #8b949e;
+    }
+
+    footer {
+      max-width: 900px;
+      margin: 60px auto 0;
+      padding-top: 24px;
+      border-top: 1px solid #21262d;
+      font-size: 0.78rem;
+      color: #484f58;
+      text-align: center;
+    }
+
+    /* Company colors */
+    .logo-astronomer { background: #0F2533; color: #00BFB3; border: 1px solid #00BFB3; }
+    .logo-tesla      { background: #1a0505; color: #E31937; border: 1px solid #E31937; }
+    .logo-amazon     { background: #1a1000; color: #FF9900; border: 1px solid #FF9900; }
+    .logo-netflix    { background: #1a0000; color: #E50914; border: 1px solid #E50914; }
+    .logo-google     { background: #001030; color: #4285F4; border: 1px solid #4285F4; }
+    .logo-airbyte    { background: #001a2e; color: #4a9eff; border: 1px solid #4a9eff; }
+    .logo-trino      { background: #1a0d00; color: #dd6b20; border: 1px solid #dd6b20; }
+    .logo-iceberg    { background: #001a1a; color: #00bcd4; border: 1px solid #00bcd4; }
+    .logo-meltano    { background: #0d001a; color: #9b59b6; border: 1px solid #9b59b6; }
+    .logo-beam       { background: #001a0d; color: #34a853; border: 1px solid #34a853; }
+    .logo-airflow    { background: #001230; color: #017cee; border: 1px solid #017cee; }
+    .logo-kestra     { background: #0a0a1a; color: #7c3aed; border: 1px solid #7c3aed; }
+
+    @media (max-width: 600px) {
+      .contribution-item { flex-direction: column; gap: 8px; }
+      .stats-row { gap: 10px; }
+      .stat { min-width: 90px; padding: 12px 16px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <div class="header">
+    <h1>Aaditya's OSS Contributions</h1>
+    <p>Open source work across data engineering projects. Clickable links to every PR and issue.</p>
+
+    <div class="stats-row">
+      <div class="stat">
+        <div class="stat-number">5</div>
+        <div class="stat-label">Open PRs</div>
+      </div>
+      <div class="stat">
+        <div class="stat-number">17</div>
+        <div class="stat-label">Issues Claimed</div>
+      </div>
+      <div class="stat">
+        <div class="stat-number">9</div>
+        <div class="stat-label">Companies</div>
+      </div>
+      <div class="stat">
+        <div class="stat-number">13</div>
+        <div class="stat-label">Repos</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LEGEND -->
+  <div class="legend">
+    <div class="legend-item">
+      <span class="status-badge status-open"><span class="status-dot"></span>Open PR</span>
+      PR submitted, under review
+    </div>
+    <div class="legend-item">
+      <span class="status-badge status-claimed"><span class="status-dot"></span>Claimed</span>
+      Issue claimed, PR not yet submitted
+    </div>
+    <div class="legend-item">
+      <span class="status-badge status-merged"><span class="status-dot"></span>Merged</span>
+      PR merged into main
+    </div>
+    <div class="legend-item">
+      <span class="status-badge status-closed"><span class="status-dot"></span>Closed</span>
+      Closed by maintainer
+    </div>
+  </div>
+
+  <!-- SECTION: EXISTING PRs -->
+  <div class="section-label">Active Pull Requests</div>
+
+  <!-- ASTRONOMER -->
+  <div class="company-section">
+    <div class="company-header">
+      <div class="company-logo logo-astronomer">AST</div>
+      <div>
+        <div class="company-name">Astronomer</div>
+        <div class="company-meta">dag-factory · astronomer-cosmos · astro-cli</div>
+      </div>
+    </div>
+
+    <div class="contribution-list">
+
+      <a class="contribution-item" href="https://github.com/astronomer/dag-factory/pull/753" target="_blank">
+        <div class="pr-number">PR #753</div>
+        <div class="contribution-body">
+          <div class="contribution-title">Operator aliases in YAML configs</div>
+          <div class="contribution-desc">Adds support for operator aliases in dag-factory YAML config files, resolving issue #58.</div>
+          <div class="contribution-meta">
+            <span class="tag tag-lang">Python</span>
+            <span class="tag tag-type">Feature</span>
+            <span>dag-factory</span>
+          </div>
+        </div>
+        <span class="status-badge status-open"><span class="status-dot"></span>Open PR</span>
+      </a>
+
+      <a class="contribution-item" href="https://github.com/astronomer/astronomer-cosmos/pull/2734" target="_blank">
+        <div class="pr-number">PR #2734</div>
+        <div class="contribution-body">
+          <div class="contribution-title">Reduce build_airflow_graph cyclomatic complexity</div>
+          <div class="contribution-desc">Extracted test-task logic into _add_test_tasks() helper. Complexity reduced from 11 to 9. Fixes UnboundLocalError when nodes dict is empty.</div>
+          <div class="contribution-meta">
+            <span class="tag tag-lang">Python</span>
+            <span class="tag tag-type">Refactor</span>
+            <span>astronomer-cosmos</span>
+          </div>
+        </div>
+        <span class="status-badge status-open"><span class="status-dot"></span>Open PR</span>
+      </a>
+
+      <a class="contribution-item" href="https://github.com/astronomer/astronomer-cosmos/pull/2747" target="_blank">
+        <div class="pr-number">PR #2747</div>
+        <div class="contribution-body">
+          <div class="contribution-title">Log redacted profile contents on cache miss</div>
+          <div class="contribution-desc">On cache miss, loads profile YAML, redacts secret_fields with ***, and includes redacted contents in INFO log. Prevents credential leaks in logs.</div>
+          <div class="contribution-meta">
+            <span class="tag tag-lang">Python</span>
+            <span class="tag tag-type-bug">Bug Fix</span>
+            <span>astronomer-cosmos</span>
+          </div>
+        </div>
+        <span class="status-badge status-open"><span class="status-dot"></span>Open PR</span>
+      </a>
+
+      <a class="contribution-item" href="https://github.com/astronomer/astronomer-cosmos/pull/2735" target="_blank">
+        <div class="pr-number">PR #2735</div>
+        <div class="contribution-body">
+          <div class="contribution-title">Unify postgres profiles in example dbt projects</div>
+          <div class="contribution-desc">Closed by maintainer - duplicate of PR #2501 already in progress. Redirected to issue #2739 (now done as PR #2747).</div>
+          <div class="contribution-meta">
+            <span class="tag tag-lang">Python</span>
+            <span class="tag tag-type">Fix</span>
+            <span>astronomer-cosmos</span>
+          </div>
+        </div>
+        <span class="status-badge status-closed"><span class="status-dot"></span>Closed</span>
+      </a>
+
+      <a class="contribution-item" href="https://github.com/astronomer/astro-cli/pull/2159" target="_blank">
+        <div class="pr-number">PR #2159</div>
+        <div class="contribution-body">
+          <div class="contribution-title">Shared constants for dev mode strings</div>
+          <div class="contribution-desc">Added ModeDocker and ModeStandalone constants to types package. Replaced hardcoded strings across docker.go, standalone.go, and cmd/airflow.go.</div>
+          <div class="contribution-meta">
+            <span class="tag tag-lang">Go</span>
+            <span class="tag tag-type">Refactor</span>
+            <span>astro-cli</span>
+          </div>
+        </div>
+        <span class="status-badge status-open"><span class="status-dot"></span>Open PR</span>
+      </a>
+
+      <a class="contribution-item" href="https://github.com/astronomer/astro-cli/pull/2160" target="_blank">
+        <div class="pr-number">PR #2160</div>
+        <div class="contribution-body">
+          <div class="contribution-title">Remove duplicate mock resets in TearDownSubTest</div>
+          <div class="contribution-desc">TearDownSubTest had duplicate AssertExpectations call and duplicate mockV1Client reset. Removed redundant lines so each subtest gets exactly one assertion check and one fresh mock reset.</div>
+          <div class="contribution-meta">
+            <span class="tag tag-lang">Go</span>
+            <span class="tag tag-type-bug">Bug Fix</span>
+            <span>astro-cli</span>
+          </div>
+        </div>
+        <span class="status-badge status-open"><span class="status-dot"></span>Open PR</span>
+      </a>
+
+    </div>
+  </div>
+
+  <hr class="divider" />
+
+  <!-- SECTION: CLAIMED ISSUES -->
+  <div class="section-label">Claimed Issues (PRs In Progress)</div>
+
+  <!-- TESLA -->
+  <div class="company-section">
+    <div class="company-header">
+      <div class="company-logo logo-tesla">TSL</div>
+      <div>
+        <div class="company-name">Tesla</div>
+        <div class="company-meta">teslamotors/fleet-telemetry · Go</div>
+      </div>
+    </div>
+
+    <div class="contribution-list">
+
+      <a class="contribution-item" href="https://github.com/teslamotors/fleet-telemetry/issues/340" target="_blank">
+        <div class="pr-number">Issue #340</div>
+        <div class="contribution-body">
+          <div class="contribution-title">Example configuration for MQTT over SSL</div>
+          <div class="contribution-desc">Add a clear example config showing MQTT over SSL setup - certificate paths, broker connection settings, and fleet-telemetry config options. Good first issue.</div>
+          <div class="contribution-meta">
+            <span class="tag tag-lang">Go</span>
+            <span class="tag tag-type-docs">Docs</span>
+            <span>fleet-telemetry</span>
+          </div>
+        </div>
+        <span class="status-badge status-claimed"><span class="status-dot"></span>Claimed</span>
+      </a>
+
+      <a class="contribution-item" href="https://github.com/teslamotors/fleet-telemetry/issues/354" target="_blank">
+        <div class="pr-number">Issue #354</div>
+        <div class="contribution-body">
+          <div class="contribution-title">Configurable Partition Strategy</div>
+          <div class="contribution-desc">Introduce a configurable partition strategy interface (by field, by time window, by vehicle ID) for the telemetry server with backward-compatible defaults.</div>
+          <div class="contribution-meta">
+            <span class="tag tag-lang">Go</span>
+            <span class="tag tag-type">Feature</span>
+            <span>fleet-telemetry</span>
+          </div>
+        </div>
+        <span class="status-badge status-claimed"><span class="status-dot"></span>Claimed</span>
+      </a>
+
+      <a class="contribution-item" href="https://github.com/teslamotors/fleet-telemetry/issues/273" target="_blank">
+        <div class="pr-number">Issue #273</div>
+        <div class="contribution-body">
+          <div class="contribution-title">Provide an AWS SQS or SNS dispatcher</div>
+          <div class="contribution-desc">Implement a dispatcher that supports SQS (point-to-point) and SNS (fan-out) message delivery, following the existing dispatcher interface pattern.</div>
+          <div class="contribution-meta">
+            <span class="tag tag-lang">Go</span>
+            <span class="tag tag-type">Feature</span>
+            <span>fleet-telemetry</span>
+          </div>
+        </div>
+        <span class="status-badge status-claimed"><span class="status-dot"></span>Claimed</span>
+      </a>
+
+    </div>
+  </div>
+
+  <!-- AMAZON -->
+  <div class="company-section">
+    <div class="company-header">
+      <div class="company-logo logo-amazon">AWS</div>
+      <div>
+        <div class="company-name">Amazon / AWS</div>
+        <div class="company-meta">aws/aws-sdk-pandas · Python</div>
+      </div>
+    </div>
+
+    <div class="contribution-list">
+
+      <a class="contribution-item" href="https://github.com/aws/aws-sdk-pandas/issues/3173" target="_blank">
+        <div class="pr-number">Issue #3173</div>
+        <div class="contribution-body">
+          <div class="contribution-title">to_iceberg: conditional merge</div>
+          <div class="contribution-desc">Add a conditional merge option to to_iceberg() allowing users to specify a merge condition predicate - critical for deduplication and incremental load patterns. Good first issue.</div>
+          <div class="contribution-meta">
+            <span class="tag tag-lang">Python</span>
+            <span class="tag tag-type">Feature</span>
+            <span>aws-sdk-pandas</span>
+          </div>
+        </div>
+        <span class="status-badge status-claimed"><span class="status-dot"></span>Claimed</span>
+      </a>
+
+      <a class="contribution-item" href="https://github.com/aws/aws-sdk-pandas/issues/3191" target="_blank">
+        <div class="pr-number">Issue #3191</div>
+        <div class="contribution-body">
+          <div class="contribution-title">EMR create_cluster support for bootstrap arguments</div>
+          <div class="contribution-desc">Extend the existing bootstrap_actions parameter to support passing arguments arrays per action, matching the AWS EMR API structure. Good first issue.</div>
+          <div class="contribution-meta">
+            <span class="tag tag-lang">Python</span>
+            <span class="tag tag-type">Feature</span>
+            <span>aws-sdk-pandas</span>
+          </div>
+        </div>
+        <span class="status-badge status-claimed"><span class="status-dot"></span>Claimed</span>
+      </a>
+
+      <a class="contribution-item" href="https://github.com/aws/aws-sdk-pandas/issues/2845" target="_blank">
+        <div class="pr-number">Issue #2845</div>
+        <div class="contribution-body">
+          <div class="contribution-title">athena.to_parquet fails with overwrite_partitions + partition expressions</div>
+          <div class="contribution-desc">Bug: to_parquet fails when mode=overwrite_partitions and partition_cols contains expressions like hour(timestamp_col). Fix partition expression handling in overwrite logic.</div>
+          <div class="contribution-meta">
+            <span class="tag tag-lang">Python</span>
+            <span class="tag tag-type-bug">Bug Fix</span>
+            <span>aws-sdk-pandas</span>
+          </div>
+        </div>
+        <span class="status-badge status-claimed"><span class="status-dot"></span>Claimed</span>
+      </a>
+
+    </div>
+  </div>
+
+  <!-- NETFLIX -->
+  <div class="company-section">
+    <div class="company-header">
+      <div class="company-logo logo-netflix">NFX</div>
+      <div>
+        <div class="company-name">Netflix</div>
+        <div class="company-meta">Netflix/metaflow · Python</div>
+      </div>
+    </div>
+
+    <div class="contribution-list">
+
+      <a class="contribution-item" href="https://github.com/Netflix/metaflow/issues/3162" target="_blank">
+        <div class="pr-number">Issue #3162</div>
+        <div class="contribution-body">
+          <div class="contribution-title">Fix MetaflowTaggingError formatting + add test coverage</div>
+          <div class="contribution-desc">Fix the MetaflowTaggingError formatting issue and add unit tests covering tagging error cases to prevent regressions.</div>
+          <div class="contribution-meta">
+            <span class="tag tag-lang">Python</span>
+            <span class="tag tag-type-bug">Bug Fix</span>
+            <span>metaflow</span>
+          </div>
+        </div>
+        <span class="status-badge status-claimed"><span class="status-dot"></span>Claimed</span>
+      </a>
+
+      <a class="contribution-item" href="https://github.com/Netflix/metaflow/issues/3163" target="_blank">
+        <div class="pr-number">Issue #3163</div>
+        <div class="contribution-body">
+          <div class="contribution-title">Add test coverage for extension_support/plugins module</div>
+          <div class="contribution-desc">Audit current test coverage, identify untested paths in the extension_support/plugins module, and add tests covering key behaviors.</div>
+          <div class="contribution-meta">
+            <span class="tag tag-lang">Python</span>
+            <span class="tag tag-type">Tests</span>
+            <span>metaflow</span>
+          </div>
+        </div>
+        <span class="status-badge status-claimed"><span class="status-dot"></span>Claimed</span>
+      </a>
+
+    </div>
+  </div>
+
+  <hr class="divider" />
+
+  <!-- SECTION: EASY CLAIMED ISSUES -->
+  <div class="section-label">Easy Claimed Issues (Good First Issues)</div>
+
+  <!-- AIRBYTE -->
+  <div class="company-section">
+    <div class="company-header">
+      <div class="company-logo logo-airbyte">AIR</div>
+      <div>
+        <div class="company-name">Airbyte</div>
+        <div class="company-meta">airbytehq/airbyte · Python · Series B</div>
+      </div>
+    </div>
+    <div class="contribution-list">
+
+      <a class="contribution-item" href="https://github.com/airbytehq/airbyte/issues/33874" target="_blank">
+        <div class="pr-number">Issue #33874</div>
+        <div class="contribution-body">
+          <div class="contribution-title">Fix broken links in docs.airbyte.io</div>
+          <div class="contribution-desc">Audit and fix all broken links across the Airbyte documentation site. Fast win - targeted change with high merge probability.</div>
+          <div class="contribution-meta">
+            <span class="tag tag-lang">Python</span>
+            <span class="tag tag-type-docs">Docs</span>
+            <span>airbyte</span>
+          </div>
+        </div>
+        <span class="status-badge status-claimed"><span class="status-dot"></span>Claimed</span>
+      </a>
+
+      <a class="contribution-item" href="https://github.com/airbytehq/airbyte/issues/44038" target="_blank">
+        <div class="pr-number">Issue #44038</div>
+        <div class="contribution-body">
+          <div class="contribution-title">LinkedIn Ads source: create organizations stream</div>
+          <div class="contribution-desc">Add the organizations stream to the LinkedIn Ads connector - new stream class, schema, and tests following existing connector patterns.</div>
+          <div class="contribution-meta">
+            <span class="tag tag-lang">Python</span>
+            <span class="tag tag-type">Feature</span>
+            <span>airbyte</span>
+          </div>
+        </div>
+        <span class="status-badge status-claimed"><span class="status-dot"></span>Claimed</span>
+      </a>
+
+    </div>
+  </div>
+
+  <!-- TRINO / STARBURST -->
+  <div class="company-section">
+    <div class="company-header">
+      <div class="company-logo logo-trino">TRN</div>
+      <div>
+        <div class="company-name">Trino / Starburst Data</div>
+        <div class="company-meta">trinodb/trino · Java · Series D</div>
+      </div>
+    </div>
+    <div class="contribution-list">
+
+      <a class="contribution-item" href="https://github.com/trinodb/trino/issues/28765" target="_blank">
+        <div class="pr-number">Issue #28765</div>
+        <div class="contribution-body">
+          <div class="contribution-title">Document truncate(number, position) function</div>
+          <div class="contribution-desc">Add clear documentation for the truncate function - description, parameter table, return type, and usage examples following existing function doc format.</div>
+          <div class="contribution-meta">
+            <span class="tag tag-lang">Java</span>
+            <span class="tag tag-type-docs">Docs</span>
+            <span>trino</span>
+          </div>
+        </div>
+        <span class="status-badge status-claimed"><span class="status-dot"></span>Claimed</span>
+      </a>
+
+      <a class="contribution-item" href="https://github.com/trinodb/trino/issues/28687" target="_blank">
+        <div class="pr-number">Issue #28687</div>
+        <div class="contribution-body">
+          <div class="contribution-title">Update default Cassandra version to 4.x</div>
+          <div class="contribution-desc">Update all references to the default Cassandra version across codebase and docs from 3.x to 4.x consistently.</div>
+          <div class="contribution-meta">
+            <span class="tag tag-lang">Java</span>
+            <span class="tag tag-type">Config</span>
+            <span>trino</span>
+          </div>
+        </div>
+        <span class="status-badge status-claimed"><span class="status-dot"></span>Claimed</span>
+      </a>
+
+    </div>
+  </div>
+
+  <!-- APACHE ICEBERG / DATABRICKS -->
+  <div class="company-section">
+    <div class="company-header">
+      <div class="company-logo logo-iceberg">ICE</div>
+      <div>
+        <div class="company-name">Apache Iceberg</div>
+        <div class="company-meta">apache/iceberg · Java/Python · Backed by Databricks + Snowflake</div>
+      </div>
+    </div>
+    <div class="contribution-list">
+
+      <a class="contribution-item" href="https://github.com/apache/iceberg/issues/15916" target="_blank">
+        <div class="pr-number">Issue #15916</div>
+        <div class="contribution-body">
+          <div class="contribution-title">Docs: Clarify Spark branch write precedence over WAP branch</div>
+          <div class="contribution-desc">Add clear documentation explaining Spark branch write precedence over WAP branch, with an example to prevent user confusion.</div>
+          <div class="contribution-meta">
+            <span class="tag tag-lang">Python</span>
+            <span class="tag tag-type-docs">Docs</span>
+            <span>iceberg</span>
+          </div>
+        </div>
+        <span class="status-badge status-claimed"><span class="status-dot"></span>Claimed</span>
+      </a>
+
+    </div>
+  </div>
+
+  <!-- MELTANO -->
+  <div class="company-section">
+    <div class="company-header">
+      <div class="company-logo logo-meltano">MLT</div>
+      <div>
+        <div class="company-name">Meltano</div>
+        <div class="company-meta">meltano/meltano · Python</div>
+      </div>
+    </div>
+    <div class="contribution-list">
+
+      <a class="contribution-item" href="https://github.com/meltano/meltano/issues/7327" target="_blank">
+        <div class="pr-number">Issue #7327</div>
+        <div class="contribution-body">
+          <div class="contribution-title">Docs: Add json-schema-for-humans Meltano schema doc</div>
+          <div class="contribution-desc">Add schema documentation using json-schema-for-humans, following the existing docs structure and location conventions.</div>
+          <div class="contribution-meta">
+            <span class="tag tag-lang">Python</span>
+            <span class="tag tag-type-docs">Docs</span>
+            <span>meltano</span>
+          </div>
+        </div>
+        <span class="status-badge status-claimed"><span class="status-dot"></span>Claimed</span>
+      </a>
+
+    </div>
+  </div>
+
+  <!-- APACHE BEAM / GOOGLE -->
+  <div class="company-section">
+    <div class="company-header">
+      <div class="company-logo logo-beam">BEM</div>
+      <div>
+        <div class="company-name">Apache Beam</div>
+        <div class="company-meta">apache/beam · Python · Created and backed by Google</div>
+      </div>
+    </div>
+    <div class="contribution-list">
+
+      <a class="contribution-item" href="https://github.com/apache/beam/issues/35935" target="_blank">
+        <div class="pr-number">Issue #35935</div>
+        <div class="contribution-body">
+          <div class="contribution-title">Update Python slowly updating side input example</div>
+          <div class="contribution-desc">Bring the Python slowly updating side input example up to date with current Beam Python SDK patterns and verify it runs correctly end-to-end.</div>
+          <div class="contribution-meta">
+            <span class="tag tag-lang">Python</span>
+            <span class="tag tag-type">Example</span>
+            <span>beam</span>
+          </div>
+        </div>
+        <span class="status-badge status-claimed"><span class="status-dot"></span>Claimed</span>
+      </a>
+
+    </div>
+  </div>
+
+  <!-- APACHE AIRFLOW / ASTRONOMER -->
+  <div class="company-section">
+    <div class="company-header">
+      <div class="company-logo logo-airflow">AF</div>
+      <div>
+        <div class="company-name">Apache Airflow</div>
+        <div class="company-meta">apache/airflow · Python · Primary backer: Astronomer</div>
+      </div>
+    </div>
+    <div class="contribution-list">
+
+      <a class="contribution-item" href="https://github.com/apache/airflow/issues/67336" target="_blank">
+        <div class="pr-number">Issue #67336</div>
+        <div class="contribution-body">
+          <div class="contribution-title">Dashboard summary shows wrong percentages when state count exceeds API cap</div>
+          <div class="contribution-desc">Bug: dashboard summary page shows incorrect percentages when a state count exceeds the 1000-item API cap. Fix the percentage calculation to handle capped counts correctly.</div>
+          <div class="contribution-meta">
+            <span class="tag tag-lang">Python</span>
+            <span class="tag tag-type-bug">Bug Fix</span>
+            <span>airflow</span>
+          </div>
+        </div>
+        <span class="status-badge status-claimed"><span class="status-dot"></span>Claimed</span>
+      </a>
+
+    </div>
+  </div>
+
+  <!-- KESTRA -->
+  <div class="company-section">
+    <div class="company-header">
+      <div class="company-logo logo-kestra">KST</div>
+      <div>
+        <div class="company-name">Kestra</div>
+        <div class="company-meta">kestra-io/kestra · Java · YC-backed</div>
+      </div>
+    </div>
+    <div class="contribution-list">
+
+      <a class="contribution-item" href="https://github.com/kestra-io/kestra/issues/15987" target="_blank">
+        <div class="pr-number">Issue #15987</div>
+        <div class="contribution-body">
+          <div class="contribution-title">CLI: log Kestra UI URL when the server is ready</div>
+          <div class="contribution-desc">Add a clear log line with the UI URL at server startup so contributors and users can immediately navigate to the UI without hunting for the URL.</div>
+          <div class="contribution-meta">
+            <span class="tag tag-lang">Java</span>
+            <span class="tag tag-type">Feature</span>
+            <span>kestra</span>
+          </div>
+        </div>
+        <span class="status-badge status-claimed"><span class="status-dot"></span>Claimed</span>
+      </a>
+
+    </div>
+  </div>
+
+  <footer>
+    Last updated: May 2026 &nbsp;·&nbsp; Aaditya Bhilegaonkar &nbsp;·&nbsp; Data Engineer
+  </footer>
+
+</body>
+</html>
