@@ -8,299 +8,313 @@
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --navy:      #0a192f;
-      --navy-l:    #112240;
-      --navy-ll:   #233554;
-      --slate:     #8892b0;
-      --slate-l:   #a8b2d8;
-      --slate-ll:  #ccd6f6;
-      --white:     #e6f1ff;
-      --green:     #64ffda;
-      --green-dim: rgba(100,255,218,.1);
-      --sidebar-w: 320px;
-      --font:      'Space Grotesk', -apple-system, sans-serif;
+      --bg:         #0a0a0a;
+      --card:       #141414;
+      --card-l:     #1c1c1c;
+      --border:     rgba(255,255,255,0.08);
+      --border-l:   rgba(255,255,255,0.14);
+      --white:      #ffffff;
+      --gray-ll:    #d1d5db;
+      --gray-l:     #9ca3af;
+      --gray:       #6b7280;
+      --purple:     #8b5cf6;
+      --purple-l:   #a78bfa;
+      --purple-dim: rgba(139,92,246,0.12);
+      --sidebar-w:  300px;
+      --font:       'Space Grotesk', -apple-system, sans-serif;
     }
 
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-
     html { scroll-behavior: smooth; }
 
     body {
-      background: var(--navy);
-      color: var(--slate);
+      background: var(--bg);
+      color: var(--gray-l);
       font-family: var(--font);
-      font-size: 16px;
+      font-size: 15px;
       line-height: 1.7;
       -webkit-font-smoothing: antialiased;
     }
 
-    body::before {
-      content: '';
-      position: fixed;
-      top: -200px; right: -200px;
-      width: 600px; height: 600px;
-      background: radial-gradient(circle, rgba(100,255,218,0.04) 0%, transparent 70%);
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    /* ════════════════ SIDEBAR ════════════════ */
+    /* ════ SIDEBAR ════ */
     #sidebar {
       position: fixed;
       top: 0; left: 0;
       width: var(--sidebar-w);
       height: 100vh;
-      padding: 64px 48px;
+      padding: 56px 44px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
+      border-right: 1px solid var(--border);
       z-index: 10;
     }
 
-    .sidebar-top { flex: 1; }
-
     .sidebar-name {
-      font-size: 1.75rem;
+      font-size: 1.6rem;
       font-weight: 700;
-      color: var(--slate-ll);
+      color: var(--white);
       letter-spacing: -0.02em;
       line-height: 1.2;
-      margin-bottom: 6px;
+      margin-bottom: 4px;
     }
 
     .sidebar-role {
-      font-size: 1rem;
-      font-weight: 500;
-      color: var(--slate-l);
-      margin-bottom: 14px;
+      font-size: 0.88rem;
+      font-weight: 400;
+      color: var(--gray-l);
+      margin-bottom: 20px;
     }
 
     .badge {
       display: inline-flex;
       align-items: center;
       gap: 7px;
-      font-size: 0.72rem;
+      font-size: 0.68rem;
       font-weight: 600;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: var(--green);
-      background: var(--green-dim);
-      border: 1px solid rgba(100,255,218,0.2);
+      color: var(--purple-l);
+      background: var(--purple-dim);
+      border: 1px solid rgba(139,92,246,0.25);
       border-radius: 99px;
       padding: 5px 12px;
-      margin-bottom: 28px;
+      margin-bottom: 36px;
     }
 
     .badge-dot {
-      width: 7px; height: 7px;
+      width: 6px; height: 6px;
       border-radius: 50%;
-      background: var(--green);
-      box-shadow: 0 0 8px var(--green);
+      background: var(--purple-l);
+      box-shadow: 0 0 8px var(--purple);
       animation: blink 2s ease-in-out infinite;
     }
 
     @keyframes blink {
       0%, 100% { opacity: 1; }
-      50%       { opacity: 0.4; }
+      50%       { opacity: 0.35; }
     }
 
     .sidebar-bio {
-      font-size: 0.88rem;
-      color: var(--slate);
+      font-size: 0.85rem;
+      color: var(--gray);
       line-height: 1.7;
-      max-width: 240px;
-      margin-bottom: 48px;
+      margin-bottom: 44px;
     }
 
-    nav { display: flex; flex-direction: column; gap: 4px; }
+    nav { display: flex; flex-direction: column; gap: 2px; }
 
     .nav-link {
       display: flex;
       align-items: center;
       gap: 14px;
       text-decoration: none;
-      color: var(--slate);
-      font-size: 0.78rem;
+      color: var(--gray);
+      font-size: 0.75rem;
       font-weight: 600;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      padding: 6px 0;
+      padding: 7px 0;
       transition: color 0.2s;
       width: fit-content;
     }
 
     .nav-line {
       height: 1px;
-      width: 28px;
-      background: var(--slate);
+      width: 24px;
+      background: var(--gray);
       transition: width 0.3s ease, background 0.2s;
     }
 
-    .nav-link:hover,
-    .nav-link.active { color: var(--slate-ll); }
-
-    .nav-link:hover .nav-line,
-    .nav-link.active .nav-line { width: 56px; background: var(--slate-ll); }
-
-    .nav-link.active { color: var(--green); }
-    .nav-link.active .nav-line { background: var(--green); }
+    .nav-link:hover { color: var(--gray-ll); }
+    .nav-link:hover .nav-line { width: 48px; background: var(--gray-ll); }
+    .nav-link.active { color: var(--purple-l); }
+    .nav-link.active .nav-line { width: 48px; background: var(--purple-l); }
 
     .socials {
       display: flex;
-      gap: 20px;
-      margin-top: 48px;
+      gap: 18px;
+      margin-top: 44px;
     }
 
     .social-link {
-      color: var(--slate);
+      color: var(--gray);
       text-decoration: none;
       transition: color 0.2s, transform 0.2s;
     }
 
-    .social-link:hover { color: var(--green); transform: translateY(-2px); }
+    .social-link:hover { color: var(--purple-l); transform: translateY(-2px); }
+    .social-icon { width: 18px; height: 18px; fill: currentColor; }
 
-    .social-icon { width: 20px; height: 20px; fill: currentColor; }
-
-    /* ════════════════ MAIN ════════════════ */
+    /* ════ MAIN ════ */
     main {
       margin-left: var(--sidebar-w);
-      padding: 96px 80px 160px 80px;
-      max-width: calc(var(--sidebar-w) + 760px);
+      padding: 80px 72px 140px;
+      max-width: calc(var(--sidebar-w) + 780px);
       position: relative;
-      z-index: 1;
     }
 
     section {
-      margin-bottom: 120px;
-      scroll-margin-top: 96px;
+      margin-bottom: 110px;
+      scroll-margin-top: 80px;
     }
 
     .section-label {
-      font-size: 0.7rem;
-      letter-spacing: 0.16em;
+      font-size: 0.63rem;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
-      color: var(--slate);
-      margin-bottom: 40px;
+      color: var(--gray);
+      margin-bottom: 36px;
       display: flex;
       align-items: center;
-      gap: 16px;
+      gap: 14px;
     }
 
     .section-label::after {
       content: '';
       flex: 1;
       height: 1px;
-      background: var(--navy-ll);
+      background: var(--border-l);
     }
 
-    /* ════════════════ ABOUT ════════════════ */
-    .about-text {
-      font-size: 1rem;
-      color: var(--slate);
-      line-height: 1.8;
-      margin-bottom: 16px;
+    /* ════ ABOUT HERO ════ */
+    .hero-line {
+      font-size: 3rem;
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      margin-bottom: 48px;
     }
 
-    .about-text b { color: var(--slate-ll); font-weight: 500; }
-    .about-text a { color: var(--green); text-decoration: none; }
-    .about-text a:hover { text-decoration: underline; }
+    .hero-line span { color: var(--purple-l); }
 
-    .stats-grid {
+    /* ════ BENTO GRID ════ */
+    .bento {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 2px;
-      margin-top: 48px;
-      border: 1px solid var(--navy-ll);
-      border-radius: 12px;
-      overflow: hidden;
+      gap: 8px;
     }
 
-    .stat-box {
-      padding: 28px 24px;
-      background: var(--navy-l);
-      text-align: center;
-      transition: background 0.15s;
+    .b-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 20px;
+      transition: border-color 0.2s, background 0.2s;
     }
 
-    .stat-box:hover { background: var(--navy-ll); }
+    .b-card:hover { border-color: var(--border-l); background: var(--card-l); }
 
-    .stat-n {
-      font-size: 2.4rem;
+    .b-chip {
+      display: inline-block;
+      font-size: 0.6rem;
       font-weight: 700;
-      color: var(--slate-ll);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--purple-l);
+      background: var(--purple-dim);
+      border-radius: 99px;
+      padding: 3px 9px;
+      margin-bottom: 14px;
+    }
+
+    /* Bio card: full width */
+    .b-bio { grid-column: 1 / -1; }
+
+    .b-bio-text {
+      font-size: 0.95rem;
+      color: var(--gray-l);
+      line-height: 1.8;
+      max-width: 680px;
+    }
+
+    .b-bio-text b { color: var(--white); font-weight: 500; }
+
+    /* Stat cards */
+    .b-stat { text-align: left; }
+
+    .b-stat-n {
+      font-size: 2.6rem;
+      font-weight: 700;
+      color: var(--white);
       letter-spacing: -0.04em;
       line-height: 1;
       display: block;
+      margin-bottom: 4px;
     }
 
-    .stat-l {
-      font-size: 0.7rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--slate);
-      margin-top: 6px;
-      display: block;
+    .b-stat-l {
+      font-size: 0.72rem;
+      color: var(--gray);
+      letter-spacing: 0.04em;
     }
 
-    .stack {
+    /* Stack card: full width */
+    .b-stack { grid-column: 1 / -1; }
+
+    .stack-chips {
       display: flex;
       flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 40px;
+      gap: 7px;
+      margin-top: 4px;
     }
 
-    .chip {
-      font-size: 0.78rem;
+    .s-chip {
+      font-size: 0.75rem;
       font-weight: 500;
       padding: 6px 14px;
-      border-radius: 99px;
-      background: var(--green-dim);
-      color: var(--green);
-      border: 1px solid rgba(100,255,218,0.15);
-      letter-spacing: 0.02em;
+      border-radius: 8px;
+      background: var(--card-l);
+      color: var(--gray-l);
+      border: 1px solid var(--border-l);
+      letter-spacing: 0.01em;
+      transition: border-color 0.15s, color 0.15s;
     }
 
-    /* ════════════════ CONTRIBUTIONS ════════════════ */
+    .s-chip:hover { border-color: var(--purple); color: var(--purple-l); }
+
+    /* ════ CONTRIBUTIONS ════ */
     .filters {
       display: flex;
-      gap: 8px;
+      gap: 6px;
       flex-wrap: wrap;
-      margin-bottom: 28px;
+      margin-bottom: 24px;
     }
 
     .pill {
-      font-size: 0.75rem;
+      font-size: 0.72rem;
       font-weight: 500;
-      padding: 7px 16px;
-      border-radius: 99px;
-      border: 1px solid var(--navy-ll);
+      font-family: var(--font);
+      padding: 6px 14px;
+      border-radius: 8px;
+      border: 1px solid var(--border-l);
       background: transparent;
-      color: var(--slate);
+      color: var(--gray);
       cursor: pointer;
       transition: all 0.15s;
       letter-spacing: 0.03em;
-      font-family: var(--font);
     }
 
-    .pill:hover { border-color: var(--green); color: var(--green); }
+    .pill:hover { border-color: var(--purple); color: var(--purple-l); }
 
     .pill.active {
-      background: var(--green-dim);
-      border-color: var(--green);
-      color: var(--green);
+      background: var(--purple-dim);
+      border-color: rgba(139,92,246,0.4);
+      color: var(--purple-l);
     }
 
-    /* Company card grid */
+    /* Company grid */
     .company-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(158px, 1fr));
-      gap: 10px;
+      grid-template-columns: repeat(auto-fill, minmax(155px, 1fr));
+      gap: 8px;
     }
 
     .co-card {
-      background: var(--navy-l);
-      border: 1px solid var(--navy-ll);
-      border-radius: 12px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
       padding: 16px;
       cursor: pointer;
       transition: border-color 0.2s, background 0.2s, transform 0.15s;
@@ -308,17 +322,17 @@
     }
 
     .co-card:hover {
-      border-color: rgba(168,178,216,0.35);
+      border-color: var(--border-l);
       transform: translateY(-2px);
     }
 
     .co-card.active {
-      border-color: var(--green);
-      background: rgba(100,255,218,0.05);
+      border-color: rgba(139,92,246,0.5);
+      background: rgba(139,92,246,0.06);
     }
 
     .co-card.dimmed {
-      opacity: 0.35;
+      opacity: 0.3;
       pointer-events: none;
     }
 
@@ -330,8 +344,7 @@
     }
 
     .co-logo {
-      width: 26px;
-      height: 26px;
+      width: 24px; height: 24px;
       border-radius: 6px;
       background: #fff;
       object-fit: contain;
@@ -339,9 +352,9 @@
     }
 
     .co-name {
-      font-size: 0.82rem;
+      font-size: 0.8rem;
       font-weight: 600;
-      color: var(--slate-ll);
+      color: var(--gray-ll);
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
@@ -354,8 +367,8 @@
     }
 
     .co-count {
-      font-size: 0.7rem;
-      color: var(--slate);
+      font-size: 0.68rem;
+      color: var(--gray);
     }
 
     .co-dots {
@@ -364,11 +377,7 @@
       align-items: center;
     }
 
-    .co-dot {
-      width: 5px;
-      height: 5px;
-      border-radius: 50%;
-    }
+    .co-dot { width: 5px; height: 5px; border-radius: 50%; }
 
     /* Detail panel */
     .detail-wrap {
@@ -381,21 +390,21 @@
 
     .detail-wrap.open {
       grid-template-rows: 1fr;
-      margin-top: 12px;
+      margin-top: 10px;
     }
 
     .detail-inner { overflow: hidden; }
 
     .detail-panel {
-      background: var(--navy-l);
-      border: 1px solid var(--navy-ll);
-      border-radius: 12px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
       overflow: hidden;
     }
 
     .detail-head {
       padding: 14px 20px;
-      border-bottom: 1px solid var(--navy-ll);
+      border-bottom: 1px solid var(--border);
       display: flex;
       align-items: center;
       gap: 10px;
@@ -409,35 +418,34 @@
     }
 
     .detail-head-name {
-      font-size: 0.82rem;
+      font-size: 0.8rem;
       font-weight: 600;
-      color: var(--slate-ll);
+      color: var(--gray-ll);
     }
 
     .detail-head-repos {
-      font-size: 0.7rem;
-      color: var(--slate);
+      font-size: 0.68rem;
+      color: var(--gray);
       margin-left: auto;
       font-family: 'SF Mono', ui-monospace, monospace;
     }
 
-    /* Contribution rows (inside panel) */
+    /* Contribution rows */
     .contrib {
       display: grid;
-      grid-template-columns: 12px 76px 1fr auto;
+      grid-template-columns: 10px 72px 1fr auto;
       align-items: center;
       gap: 16px;
       padding: 13px 20px;
       text-decoration: none;
       color: inherit;
       transition: background 0.15s;
-      border-bottom: 1px solid var(--navy-ll);
+      border-bottom: 1px solid var(--border);
     }
 
     .contrib:last-child { border-bottom: none; }
-
-    .contrib:hover { background: var(--navy-ll); }
-    .contrib:hover .contrib-title { color: var(--green); }
+    .contrib:hover { background: var(--card-l); }
+    .contrib:hover .contrib-title { color: var(--purple-l); }
     .contrib:hover .contrib-arrow { opacity: 1; transform: translate(3px,-3px); }
 
     .sdot {
@@ -446,21 +454,20 @@
       justify-self: center;
     }
 
-    .s-open    { background: #4ade80; box-shadow: 0 0 7px #4ade8066; }
-    .s-claimed { background: #fbbf24; box-shadow: 0 0 7px #fbbf2466; }
-    .s-merged  { background: var(--green); box-shadow: 0 0 7px rgba(100,255,218,.4); }
-    .s-closed  { background: var(--navy-ll); }
+    .s-open    { background: #4ade80; box-shadow: 0 0 7px #4ade8055; }
+    .s-claimed { background: #fbbf24; box-shadow: 0 0 7px #fbbf2455; }
+    .s-merged  { background: var(--purple-l); box-shadow: 0 0 7px rgba(139,92,246,.5); }
+    .s-closed  { background: #374151; }
 
     .contrib-label {
-      font-size: 0.7rem;
+      font-size: 0.68rem;
       font-family: 'SF Mono', ui-monospace, monospace;
-      color: var(--slate);
+      color: var(--gray);
     }
 
     .contrib-title {
-      font-size: 0.9rem;
-      font-weight: 400;
-      color: var(--slate-l);
+      font-size: 0.88rem;
+      color: var(--gray-l);
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -474,18 +481,18 @@
     }
 
     .contrib-lang {
-      font-size: 0.68rem;
+      font-size: 0.65rem;
       padding: 3px 9px;
-      border-radius: 99px;
-      background: var(--navy);
-      border: 1px solid var(--navy-ll);
-      color: var(--slate);
+      border-radius: 6px;
+      background: var(--card-l);
+      border: 1px solid var(--border-l);
+      color: var(--gray);
       white-space: nowrap;
     }
 
     .contrib-arrow {
       font-size: 0.8rem;
-      color: var(--green);
+      color: var(--purple-l);
       opacity: 0;
       transition: opacity 0.15s, transform 0.15s;
     }
@@ -494,52 +501,54 @@
 
     .no-items {
       padding: 20px;
-      font-size: 0.82rem;
-      color: var(--slate);
+      font-size: 0.8rem;
+      color: var(--gray);
       text-align: center;
     }
 
-    /* ════════════════ CONTACT ════════════════ */
+    /* ════ CONTACT ════ */
     .contact-heading {
-      font-size: 2.8rem;
+      font-size: 3rem;
       font-weight: 700;
-      color: var(--slate-ll);
+      color: var(--white);
       letter-spacing: -0.03em;
-      line-height: 1.15;
-      margin-bottom: 20px;
+      line-height: 1.1;
+      margin-bottom: 16px;
     }
 
     .contact-sub {
-      font-size: 1rem;
-      color: var(--slate);
+      font-size: 0.95rem;
+      color: var(--gray-l);
       line-height: 1.7;
-      max-width: 480px;
-      margin-bottom: 36px;
+      max-width: 420px;
+      margin-bottom: 32px;
     }
 
     .btn {
       display: inline-flex;
       align-items: center;
       gap: 10px;
-      font-size: 0.85rem;
+      font-size: 0.82rem;
       font-weight: 600;
       font-family: var(--font);
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      color: var(--green);
-      border: 1px solid var(--green);
-      border-radius: 4px;
-      padding: 16px 28px;
+      color: var(--purple-l);
+      border: 1px solid rgba(139,92,246,0.4);
+      border-radius: 8px;
+      padding: 14px 26px;
       text-decoration: none;
-      transition: background 0.2s, color 0.2s, transform 0.2s;
+      background: var(--purple-dim);
+      transition: background 0.2s, border-color 0.2s, transform 0.2s;
     }
 
     .btn:hover {
-      background: var(--green-dim);
+      background: rgba(139,92,246,0.2);
+      border-color: rgba(139,92,246,0.7);
       transform: translateY(-2px);
     }
 
-    /* ════════════════ MOBILE ════════════════ */
+    /* ════ MOBILE ════ */
     @media (max-width: 860px) {
       :root { --sidebar-w: 0px; }
 
@@ -547,25 +556,28 @@
         position: relative;
         width: 100%;
         height: auto;
-        padding: 48px 28px 32px;
-        border-bottom: 1px solid var(--navy-ll);
+        padding: 40px 24px 28px;
+        border-right: none;
+        border-bottom: 1px solid var(--border);
       }
 
-      nav { flex-direction: row; flex-wrap: wrap; gap: 8px; margin-top: 32px; }
+      nav { flex-direction: row; flex-wrap: wrap; gap: 8px; margin-top: 28px; }
       .nav-link { font-size: 0.7rem; gap: 8px; }
       .nav-line { display: none; }
-      .socials { margin-top: 24px; }
+      .socials { margin-top: 20px; }
 
-      main { margin-left: 0; padding: 48px 28px 100px; }
+      main { margin-left: 0; padding: 40px 24px 100px; }
 
-      .stats-grid { grid-template-columns: repeat(2, 1fr); }
-      .contact-heading { font-size: 2rem; }
+      .hero-line { font-size: 2rem; }
+      .bento { grid-template-columns: repeat(2, 1fr); }
+      .b-bio { grid-column: 1 / -1; }
+      .b-stack { grid-column: 1 / -1; }
       .company-grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
 
-      .contrib {
-        grid-template-columns: 12px 1fr auto;
-      }
+      .contrib { grid-template-columns: 10px 1fr auto; }
       .contrib-label { display: none; }
+
+      .contact-heading { font-size: 2rem; }
     }
   </style>
 </head>
@@ -573,7 +585,7 @@
 
 <!-- SIDEBAR -->
 <aside id="sidebar">
-  <div class="sidebar-top">
+  <div>
     <h1 class="sidebar-name">Aaditya<br>Bhilegaonkar</h1>
     <p class="sidebar-role">Data Engineer</p>
 
@@ -583,7 +595,7 @@
     </span>
 
     <p class="sidebar-bio">
-      Building pipelines and data infrastructure that organizations can rely on.
+      Pipelines, orchestration, and data infrastructure. Open to new roles.
     </p>
 
     <nav id="nav">
@@ -621,44 +633,60 @@
   <section id="about">
     <div class="section-label">About</div>
 
-    <p class="about-text">
-      I'm a <b>Data Engineer</b> who builds pipelines, orchestration systems, and infrastructure that teams can trust. I care about data quality, reliability, and code that the next engineer can actually follow.
-    </p>
+    <p class="hero-line">Data engineer.<br><span>Building pipelines</span><br>teams rely on.</p>
 
-    <p class="about-text">
-      Right now I'm shipping open source contributions to repos at <b>Astronomer</b>, <b>Tesla</b>, <b>Amazon</b>, <b>Netflix</b>, and more. It's the fastest way to work alongside world-class engineers and understand the tools I use every day from the inside.
-    </p>
+    <div class="bento">
 
-    <div class="stats-grid">
-      <div class="stat-box">
-        <span class="stat-n" data-target="5">0</span>
-        <span class="stat-l">Open PRs</span>
+      <!-- Bio card -->
+      <div class="b-card b-bio">
+        <span class="b-chip">Bio</span>
+        <p class="b-bio-text">
+          I build <b>pipelines, orchestration systems, and data infrastructure</b> that organizations can trust. I care about data quality, reliability, and code the next engineer can follow. Right now I'm shipping open source contributions to repos at <b>Astronomer, Tesla, Amazon, and Netflix</b>, working alongside engineers who built the tools I use every day.
+        </p>
       </div>
-      <div class="stat-box">
-        <span class="stat-n" data-target="17">0</span>
-        <span class="stat-l">Claimed Issues</span>
-      </div>
-      <div class="stat-box">
-        <span class="stat-n" data-target="11">0</span>
-        <span class="stat-l">Companies</span>
-      </div>
-      <div class="stat-box">
-        <span class="stat-n" data-target="13">0</span>
-        <span class="stat-l">Repos</span>
-      </div>
-    </div>
 
-    <div class="stack">
-      <span class="chip">Python</span>
-      <span class="chip">Apache Spark</span>
-      <span class="chip">Apache Airflow</span>
-      <span class="chip">dbt</span>
-      <span class="chip">Apache Kafka</span>
-      <span class="chip">Snowflake</span>
-      <span class="chip">SQL</span>
-      <span class="chip">Go</span>
-      <span class="chip">Apache Iceberg</span>
-      <span class="chip">AWS</span>
+      <!-- Stat cards -->
+      <div class="b-card b-stat">
+        <span class="b-chip">PRs</span>
+        <span class="b-stat-n" data-target="5">0</span>
+        <span class="b-stat-l">Open pull requests</span>
+      </div>
+
+      <div class="b-card b-stat">
+        <span class="b-chip">Issues</span>
+        <span class="b-stat-n" data-target="17">0</span>
+        <span class="b-stat-l">Issues claimed</span>
+      </div>
+
+      <div class="b-card b-stat">
+        <span class="b-chip">Companies</span>
+        <span class="b-stat-n" data-target="11">0</span>
+        <span class="b-stat-l">Active targets</span>
+      </div>
+
+      <div class="b-card b-stat">
+        <span class="b-chip">Repos</span>
+        <span class="b-stat-n" data-target="13">0</span>
+        <span class="b-stat-l">Repositories touched</span>
+      </div>
+
+      <!-- Stack card -->
+      <div class="b-card b-stack">
+        <span class="b-chip">Stack</span>
+        <div class="stack-chips">
+          <span class="s-chip">Python</span>
+          <span class="s-chip">Apache Spark</span>
+          <span class="s-chip">Apache Airflow</span>
+          <span class="s-chip">dbt</span>
+          <span class="s-chip">Apache Kafka</span>
+          <span class="s-chip">Snowflake</span>
+          <span class="s-chip">SQL</span>
+          <span class="s-chip">Go</span>
+          <span class="s-chip">Apache Iceberg</span>
+          <span class="s-chip">AWS</span>
+        </div>
+      </div>
+
     </div>
   </section>
 
@@ -690,11 +718,11 @@
     <h2 class="contact-heading">Let's work<br>together.</h2>
 
     <p class="contact-sub">
-      I'm open to full-time data engineering roles. If your team is building something ambitious with data, I want to hear about it.
+      Open to full-time data engineering roles. If your team is building something serious with data, I want to hear about it.
     </p>
 
     <a class="btn" href="mailto:aadityabhilegaonkar@gmail.com">
-      Say hello <span>&#8599;</span>
+      Say hello &#8599;
     </a>
   </section>
 
@@ -706,12 +734,12 @@ const companies = [
     name: 'Astronomer', domain: 'astronomer.io',
     repos: 'dag-factory, astronomer-cosmos, astro-cli',
     items: [
-      { label:'PR #753',  title:'Operator aliases in YAML configs',      repo:'dag-factory',       status:'open',   url:'https://github.com/astronomer/dag-factory/pull/753',       lang:'Python' },
-      { label:'PR #2734', title:'Reduce build_airflow_graph complexity', repo:'astronomer-cosmos', status:'open',   url:'https://github.com/astronomer/astronomer-cosmos/pull/2734', lang:'Python' },
-      { label:'PR #2747', title:'Log redacted profile on cache miss',    repo:'astronomer-cosmos', status:'open',   url:'https://github.com/astronomer/astronomer-cosmos/pull/2747', lang:'Python' },
-      { label:'PR #2735', title:'Unify postgres profiles in dbt examples',repo:'astronomer-cosmos',status:'closed', url:'https://github.com/astronomer/astronomer-cosmos/pull/2735', lang:'Python' },
-      { label:'PR #2159', title:'Shared constants for dev mode strings', repo:'astro-cli',         status:'open',   url:'https://github.com/astronomer/astro-cli/pull/2159',          lang:'Go'     },
-      { label:'PR #2160', title:'Remove duplicate mock resets',          repo:'astro-cli',         status:'open',   url:'https://github.com/astronomer/astro-cli/pull/2160',          lang:'Go'     },
+      { label:'PR #753',  title:'Operator aliases in YAML configs',       repo:'dag-factory',       status:'open',   url:'https://github.com/astronomer/dag-factory/pull/753',       lang:'Python' },
+      { label:'PR #2734', title:'Reduce build_airflow_graph complexity',  repo:'astronomer-cosmos', status:'open',   url:'https://github.com/astronomer/astronomer-cosmos/pull/2734', lang:'Python' },
+      { label:'PR #2747', title:'Log redacted profile on cache miss',     repo:'astronomer-cosmos', status:'open',   url:'https://github.com/astronomer/astronomer-cosmos/pull/2747', lang:'Python' },
+      { label:'PR #2735', title:'Unify postgres profiles in dbt examples',repo:'astronomer-cosmos', status:'closed', url:'https://github.com/astronomer/astronomer-cosmos/pull/2735', lang:'Python' },
+      { label:'PR #2159', title:'Shared constants for dev mode strings',  repo:'astro-cli',         status:'open',   url:'https://github.com/astronomer/astro-cli/pull/2159',          lang:'Go'     },
+      { label:'PR #2160', title:'Remove duplicate mock resets',           repo:'astro-cli',         status:'open',   url:'https://github.com/astronomer/astro-cli/pull/2160',          lang:'Go'     },
     ]
   },
   {
@@ -794,13 +822,13 @@ const companies = [
 ];
 
 const dotClass = { open:'s-open', claimed:'s-claimed', merged:'s-merged', closed:'s-closed' };
-const dotColor  = { open:'#4ade80', claimed:'#fbbf24', merged:'#64ffda', closed:'#233554' };
+const dotColor  = { open:'#4ade80', claimed:'#fbbf24', merged:'#a78bfa', closed:'#374151' };
 
-const grid   = document.getElementById('company-grid');
-const wrap   = document.getElementById('detail-wrap');
-const panel  = document.getElementById('detail-panel');
+const grid  = document.getElementById('company-grid');
+const wrap  = document.getElementById('detail-wrap');
+const panel = document.getElementById('detail-panel');
 
-let activeFilter = 'all';
+let activeFilter  = 'all';
 let activeCompany = null;
 
 function faviconUrl(domain) {
@@ -816,8 +844,9 @@ function renderGrid() {
   companies.forEach((company, idx) => {
     const visibleItems = company.items.filter(matchesFilter);
     const card = document.createElement('div');
-    card.className = 'co-card' + (activeCompany === idx ? ' active' : '') + (visibleItems.length === 0 ? ' dimmed' : '');
-    card.dataset.idx = idx;
+    card.className = 'co-card'
+      + (activeCompany === idx ? ' active' : '')
+      + (visibleItems.length === 0 ? ' dimmed' : '');
 
     const dots = company.items.map(i =>
       `<span class="co-dot" style="background:${dotColor[i.status]}"></span>`
@@ -880,7 +909,6 @@ function toggleCompany(idx) {
   renderGrid();
 }
 
-// Filter pills
 document.querySelectorAll('.pill').forEach(pill => {
   pill.addEventListener('click', () => {
     activeFilter = pill.dataset.filter;
@@ -891,12 +919,11 @@ document.querySelectorAll('.pill').forEach(pill => {
   });
 });
 
-// Initial render
 renderGrid();
 
 // Active nav on scroll
-const sections  = document.querySelectorAll('section[id]');
-const navLinks  = document.querySelectorAll('.nav-link');
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.nav-link');
 
 const observer = new IntersectionObserver(entries => {
   entries.forEach(entry => {
