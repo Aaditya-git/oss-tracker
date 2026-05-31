@@ -40,7 +40,8 @@
       --gray:       #6b6b80;
       --purple-dim: rgba(139,92,246,0.1);
       --nav-bg:     rgba(245,243,238,0.88);
-      --stars-op:   0;
+      --stars-op:   0.55;
+      --stars-filter: invert(1);
     }
 
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -62,7 +63,8 @@
       position: fixed; inset: 0;
       z-index: 0; pointer-events: none;
       opacity: var(--stars-op);
-      transition: opacity 0.6s ease;
+      filter: var(--stars-filter, none);
+      transition: opacity 0.6s ease, filter 0.6s ease;
     }
 
     /* ════ TOP NAV ════ */
@@ -230,6 +232,28 @@
       font-size: 1rem; color: var(--gray-ll);
       line-height: 1.6; font-weight: 400;
       transition: color 0.4s;
+      margin-bottom: 24px;
+    }
+
+    .sidebar-resume {
+      display: inline-flex; align-items: center; gap: 9px;
+      font-size: 0.88rem; font-weight: 600;
+      font-family: var(--font);
+      color: var(--purple-l);
+      background: var(--purple-dim);
+      border: 1px solid rgba(139,92,246,0.35);
+      border-radius: 10px;
+      padding: 10px 18px;
+      text-decoration: none;
+      letter-spacing: 0.01em;
+      transition: background 0.2s, border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+    }
+
+    .sidebar-resume:hover {
+      background: rgba(139,92,246,0.2);
+      border-color: rgba(139,92,246,0.65);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(139,92,246,0.25);
     }
 
     .socials { display: flex; gap: 12px; }
@@ -478,6 +502,11 @@
     <p class="sidebar-tagline">
       Turning raw data into reliable infrastructure.<br>One PR at a time.
     </p>
+
+    <a class="sidebar-resume" href="/resume.pdf" target="_blank" rel="noopener">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" style="flex-shrink:0"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm-1 1.5L18.5 9H13V3.5zM6 4h5v7h7v9H6V4z"/></svg>
+      View Resume
+    </a>
   </div>
 
   <div class="socials">
