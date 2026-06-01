@@ -430,6 +430,11 @@
     .contrib-arrow { font-size: 0.8rem; color: var(--purple-l); opacity: 0; transition: opacity 0.15s, transform 0.15s; }
     .contrib.hidden { display: none; }
     .no-items { padding: 20px; font-size: 0.85rem; color: var(--gray-l); text-align: center; }
+    /* admin mode */
+    #admin-indicator { display:none; align-items:center; padding:3px 9px; background:rgba(251,191,36,0.12); border:1px solid rgba(251,191,36,0.35); border-radius:6px; font-size:0.68rem; font-weight:700; color:#fbbf24; letter-spacing:0.08em; }
+    .admin-cycle { cursor:pointer; font-size:0.7rem; font-weight:600; padding:3px 9px; border-radius:6px; border:1px solid rgba(251,191,36,0.45); background:rgba(251,191,36,0.1); color:#fbbf24; font-family:var(--font); white-space:nowrap; transition:background 0.15s; }
+    .admin-cycle:hover { background:rgba(251,191,36,0.22); }
+    .contrib-admin { display:grid; grid-template-columns:10px 90px 1fr auto; align-items:center; gap:12px; padding:10px 16px; border-bottom:1px solid var(--border); outline:1px solid rgba(251,191,36,0.15); }
 
     /* ════ CONTACT ════ */
     .contact-heading { font-size: 3rem; font-weight: 700; color: var(--white); letter-spacing: -0.04em; line-height: 1.1; margin-bottom: 14px; transition: color 0.4s; }
@@ -508,6 +513,7 @@
     <a class="tnav-resume" href="/resume.pdf" target="_blank" rel="noopener">
       Resume <span>&#8599;</span>
     </a>
+    <div id="admin-indicator">ADMIN</div>
   </div>
 </nav>
 
@@ -569,22 +575,22 @@
 
       <div class="b-card b-stat">
         <span class="b-chip">PRs</span>
-        <span class="b-stat-n" data-target="7">0</span>
+        <span class="b-stat-n" id="stat-prs" data-target="7">0</span>
         <span class="b-stat-l">Open pull requests</span>
       </div>
       <div class="b-card b-stat">
         <span class="b-chip">Issues</span>
-        <span class="b-stat-n" data-target="10">0</span>
+        <span class="b-stat-n" id="stat-issues" data-target="10">0</span>
         <span class="b-stat-l">Issues claimed</span>
       </div>
       <div class="b-card b-stat">
         <span class="b-chip">Companies</span>
-        <span class="b-stat-n" data-target="9">0</span>
+        <span class="b-stat-n" id="stat-companies" data-target="9">0</span>
         <span class="b-stat-l">Active targets</span>
       </div>
       <div class="b-card b-stat">
         <span class="b-chip">Repos</span>
-        <span class="b-stat-n" data-target="11">0</span>
+        <span class="b-stat-n" id="stat-repos" data-target="11">0</span>
         <span class="b-stat-l">Repos touched</span>
       </div>
 
@@ -817,6 +823,8 @@ const companies = [
 
 const dotClass = { open:'s-open', claimed:'s-claimed', merged:'s-merged', closed:'s-closed' };
 const dotColor  = { open:'#4ade80', claimed:'#fbbf24', merged:'#a78bfa', closed:'#6b7280' };
+const statusLabels = { open:'Open', merged:'Merged', claimed:'Claimed', closed:'Closed' };
+const statusCycle  = ['open','merged','claimed','closed'];
 
 const grid  = document.getElementById('company-grid');
 const wrap  = document.getElementById('detail-wrap');
@@ -852,22 +860,36 @@ function renderPanel(idx) {
   const visible = c.items.filter(matchesFilter);
   const rows = visible.length === 0
     ? `<div class="no-items">No ${activeFilter} items.</div>`
-    : visible.map(i=>`
-        <a class="contrib" href="${i.url}" target="_blank" rel="noopener">
-          <span class="sdot ${dotClass[i.status]}"></span>
-          <span class="contrib-label">${i.label}</span>
-          <span class="contrib-title">${i.title}</span>
-          <span class="contrib-right">
-            <span class="contrib-lang">${i.lang}</span>
-            <span class="contrib-arrow">&#8599;</span>
-          </span>
-        </a>`).join('');
+    : visible.map(i => adminMode
+        ? `<div class="contrib-admin">
+             <span class="sdot ${dotClass[i.status]}"></span>
+             <span class="contrib-label">${i.label}</span>
+             <span class="contrib-title">${i.title}</span>
+             <span class="contrib-right">
+               <span class="contrib-lang">${i.lang}</span>
+               <button class="admin-cycle" data-cidx="${idx}" data-label="${i.label}">${statusLabels[i.status]} ↺</button>
+             </span>
+           </div>`
+        : `<a class="contrib" href="${i.url}" target="_blank" rel="noopener">
+             <span class="sdot ${dotClass[i.status]}"></span>
+             <span class="contrib-label">${i.label}</span>
+             <span class="contrib-title">${i.title}</span>
+             <span class="contrib-right">
+               <span class="contrib-lang">${i.lang}</span>
+               <span class="contrib-arrow">&#8599;</span>
+             </span>
+           </a>`).join('');
   panel.innerHTML = `
     <div class="detail-head">
       <img class="detail-head-logo" src="${faviconUrl(c.domain)}" alt="${c.name}"/>
       <span class="detail-head-name">${c.name}</span>
       <span class="detail-head-repos">${c.repos}</span>
     </div>${rows}`;
+  if (adminMode) {
+    panel.querySelectorAll('.admin-cycle').forEach(btn => {
+      btn.addEventListener('click', () => cycleItemStatus(+btn.dataset.cidx, btn.dataset.label));
+    });
+  }
 }
 
 function toggleCompany(idx) {
@@ -884,6 +906,72 @@ document.querySelectorAll('.pill').forEach(pill => {
     renderGrid();
     if (activeCompany !== null) renderPanel(activeCompany);
   });
+});
+
+/* ════ ADMIN MODE ════
+   Secret: type the letter 'a' three times within 1 second.
+   A yellow ADMIN badge appears in the nav. Open any company card
+   and click the yellow status button on each row to cycle its status.
+   Changes are saved to localStorage and survive page refresh.
+*/
+const ADMIN_STORE = 'oss-status-overrides';
+let adminMode = false;
+let adminKeyBuf = [];
+
+(function applyOverrides() {
+  try {
+    const saved = JSON.parse(localStorage.getItem(ADMIN_STORE) || '{}');
+    companies.forEach(c => c.items.forEach(item => {
+      if (saved[item.label] !== undefined) item.status = saved[item.label];
+    }));
+    const all = companies.flatMap(c => c.items);
+    document.getElementById('stat-prs').dataset.target      = all.filter(i => i.label.startsWith('PR') && i.status === 'open').length;
+    document.getElementById('stat-issues').dataset.target   = all.filter(i => i.status === 'claimed').length;
+    document.getElementById('stat-companies').dataset.target = companies.length;
+    document.getElementById('stat-repos').dataset.target    = new Set(all.map(i => i.repo)).size;
+  } catch(e) {}
+})();
+
+function saveOverride(label, status) {
+  try {
+    const saved = JSON.parse(localStorage.getItem(ADMIN_STORE) || '{}');
+    saved[label] = status;
+    localStorage.setItem(ADMIN_STORE, JSON.stringify(saved));
+  } catch(e) {}
+}
+
+function cycleItemStatus(cidx, label) {
+  const item = companies[cidx].items.find(i => i.label === label);
+  item.status = statusCycle[(statusCycle.indexOf(item.status) + 1) % statusCycle.length];
+  saveOverride(label, item.status);
+  renderPanel(cidx);
+  renderGrid();
+  syncStats();
+}
+
+function syncStats() {
+  const all = companies.flatMap(c => c.items);
+  document.getElementById('stat-prs').textContent      = all.filter(i => i.label.startsWith('PR') && i.status === 'open').length;
+  document.getElementById('stat-issues').textContent   = all.filter(i => i.status === 'claimed').length;
+  document.getElementById('stat-companies').textContent = companies.length;
+  document.getElementById('stat-repos').textContent    = new Set(all.map(i => i.repo)).size;
+}
+
+function toggleAdminMode() {
+  adminMode = !adminMode;
+  document.getElementById('admin-indicator').style.display = adminMode ? 'flex' : 'none';
+  if (activeCompany !== null) renderPanel(activeCompany);
+}
+
+document.addEventListener('keydown', e => {
+  if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+  const now = Date.now();
+  adminKeyBuf.push({ key: e.key, t: now });
+  adminKeyBuf = adminKeyBuf.filter(k => now - k.t < 1000);
+  if (adminKeyBuf.length >= 3 && adminKeyBuf.slice(-3).every(k => k.key === 'a')) {
+    adminKeyBuf = [];
+    toggleAdminMode();
+  }
 });
 
 renderGrid();
