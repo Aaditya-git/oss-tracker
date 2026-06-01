@@ -569,22 +569,22 @@
 
       <div class="b-card b-stat">
         <span class="b-chip">PRs</span>
-        <span class="b-stat-n" data-target="5">0</span>
+        <span class="b-stat-n" data-target="7">0</span>
         <span class="b-stat-l">Open pull requests</span>
       </div>
       <div class="b-card b-stat">
         <span class="b-chip">Issues</span>
-        <span class="b-stat-n" data-target="17">0</span>
+        <span class="b-stat-n" data-target="10">0</span>
         <span class="b-stat-l">Issues claimed</span>
       </div>
       <div class="b-card b-stat">
         <span class="b-chip">Companies</span>
-        <span class="b-stat-n" data-target="11">0</span>
+        <span class="b-stat-n" data-target="9">0</span>
         <span class="b-stat-l">Active targets</span>
       </div>
       <div class="b-card b-stat">
         <span class="b-chip">Repos</span>
-        <span class="b-stat-n" data-target="13">0</span>
+        <span class="b-stat-n" data-target="11">0</span>
         <span class="b-stat-l">Repos touched</span>
       </div>
 
@@ -778,26 +778,17 @@
 /* ── CONTRIBUTIONS ── */
 const companies = [
   { name:'Astronomer', domain:'astronomer.io', repos:'dag-factory, astronomer-cosmos, astro-cli', items:[
-    { label:'PR #753',  title:'Operator aliases in YAML configs',        repo:'dag-factory',       status:'open',   url:'https://github.com/astronomer/dag-factory/pull/753',       lang:'Python' },
-    { label:'PR #2734', title:'Reduce build_airflow_graph complexity',   repo:'astronomer-cosmos', status:'open',   url:'https://github.com/astronomer/astronomer-cosmos/pull/2734', lang:'Python' },
-    { label:'PR #2747', title:'Log redacted profile on cache miss',      repo:'astronomer-cosmos', status:'open',   url:'https://github.com/astronomer/astronomer-cosmos/pull/2747', lang:'Python' },
-    { label:'PR #2735', title:'Unify postgres profiles in dbt examples', repo:'astronomer-cosmos', status:'closed', url:'https://github.com/astronomer/astronomer-cosmos/pull/2735', lang:'Python' },
-    { label:'PR #2159', title:'Shared constants for dev mode strings',   repo:'astro-cli',         status:'open',   url:'https://github.com/astronomer/astro-cli/pull/2159',          lang:'Go'     },
-    { label:'PR #2160', title:'Remove duplicate mock resets',            repo:'astro-cli',         status:'open',   url:'https://github.com/astronomer/astro-cli/pull/2160',          lang:'Go'     },
+    { label:'PR #753',  title:'Operator aliases in YAML configs',                          repo:'dag-factory',       status:'open',   url:'https://github.com/astronomer/dag-factory/pull/753',       lang:'Python' },
+    { label:'PR #2734', title:'Reduce build_airflow_graph complexity',                     repo:'astronomer-cosmos', status:'open',   url:'https://github.com/astronomer/astronomer-cosmos/pull/2734', lang:'Python' },
+    { label:'PR #2747', title:'Log redacted profile on cache miss',                        repo:'astronomer-cosmos', status:'open',   url:'https://github.com/astronomer/astronomer-cosmos/pull/2747', lang:'Python' },
+    { label:'PR #2748', title:'Extend Snowflake mappings: authenticator, host, port, CSK', repo:'astronomer-cosmos', status:'open',   url:'https://github.com/astronomer/astronomer-cosmos/pull/2748', lang:'Python' },
+    { label:'PR #2735', title:'Unify postgres profiles in dbt examples',                   repo:'astronomer-cosmos', status:'closed', url:'https://github.com/astronomer/astronomer-cosmos/pull/2735', lang:'Python' },
+    { label:'PR #2159', title:'Shared constants for dev mode strings',                     repo:'astro-cli',         status:'open',   url:'https://github.com/astronomer/astro-cli/pull/2159',          lang:'Go'     },
+    { label:'PR #2160', title:'Remove duplicate mock resets',                              repo:'astro-cli',         status:'open',   url:'https://github.com/astronomer/astro-cli/pull/2160',          lang:'Go'     },
   ]},
-  { name:'Tesla',        domain:'tesla.com',          repos:'fleet-telemetry', items:[
-    { label:'#340', title:'Example config for MQTT over SSL', repo:'fleet-telemetry', status:'claimed', url:'https://github.com/teslamotors/fleet-telemetry/issues/340', lang:'Go' },
-    { label:'#354', title:'Configurable Partition Strategy',  repo:'fleet-telemetry', status:'claimed', url:'https://github.com/teslamotors/fleet-telemetry/issues/354', lang:'Go' },
-    { label:'#273', title:'AWS SQS/SNS dispatcher',           repo:'fleet-telemetry', status:'claimed', url:'https://github.com/teslamotors/fleet-telemetry/issues/273', lang:'Go' },
-  ]},
-  { name:'Amazon / AWS', domain:'aws.amazon.com',     repos:'aws-sdk-pandas', items:[
-    { label:'#3173', title:'to_iceberg: conditional merge',          repo:'aws-sdk-pandas', status:'claimed', url:'https://github.com/aws/aws-sdk-pandas/issues/3173', lang:'Python' },
-    { label:'#3191', title:'EMR create_cluster bootstrap arguments', repo:'aws-sdk-pandas', status:'claimed', url:'https://github.com/aws/aws-sdk-pandas/issues/3191', lang:'Python' },
-    { label:'#2845', title:'athena.to_parquet overwrite_partitions', repo:'aws-sdk-pandas', status:'claimed', url:'https://github.com/aws/aws-sdk-pandas/issues/2845', lang:'Python' },
-  ]},
-  { name:'Netflix',      domain:'netflix.com',        repos:'metaflow', items:[
-    { label:'#3162', title:'Fix MetaflowTaggingError formatting + tests', repo:'metaflow', status:'claimed', url:'https://github.com/Netflix/metaflow/issues/3162', lang:'Python' },
-    { label:'#3163', title:'Test coverage for plugins module',            repo:'metaflow', status:'claimed', url:'https://github.com/Netflix/metaflow/issues/3163', lang:'Python' },
+  { name:'Tesla', domain:'tesla.com', repos:'fleet-telemetry', items:[
+    { label:'PR #513', title:'Document Kafka partition strategy and VIN-based message keys', repo:'fleet-telemetry', status:'open',    url:'https://github.com/teslamotors/fleet-telemetry/pull/513',    lang:'Go' },
+    { label:'#273',    title:'AWS SQS/SNS dispatcher',                                      repo:'fleet-telemetry', status:'claimed', url:'https://github.com/teslamotors/fleet-telemetry/issues/273',  lang:'Go' },
   ]},
   { name:'Airbyte',      domain:'airbyte.com',        repos:'airbyte', items:[
     { label:'#33874', title:'Fix broken links in docs',           repo:'airbyte', status:'claimed', url:'https://github.com/airbytehq/airbyte/issues/33874', lang:'Python' },
