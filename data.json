@@ -200,7 +200,7 @@
         "label": "#15987",
         "title": "Log Kestra UI URL when server is ready",
         "repo": "kestra",
-        "status": "merged",
+        "status": "claimed",
         "url": "https://github.com/kestra-io/kestra/issues/15987",
         "lang": "Java"
       }
