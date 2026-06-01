@@ -810,7 +810,6 @@ const dotClass     = { open:'s-open', claimed:'s-claimed', merged:'s-merged', cl
 const dotColor     = { open:'#4ade80', claimed:'#fbbf24', merged:'#a78bfa', closed:'#6b7280' };
 const statusLabels = { open:'Open', merged:'Merged', claimed:'Claimed', closed:'Closed' };
 const statusCycle  = ['open','merged','claimed','closed'];
-const LANGS        = ['Python','Go','Java','TypeScript','JavaScript','Rust','Scala','Other'];
 
 const grid  = document.getElementById('company-grid');
 const wrap  = document.getElementById('detail-wrap');
@@ -889,17 +888,8 @@ function renderPanel(idx) {
     </div>
     <div class="admin-item-form" id="admin-item-form" style="display:none">
       <div class="admin-form-row">
-        <input id="fi-label" placeholder="Label  e.g. PR #123 or #456" />
-        <input id="fi-title" placeholder="Title" />
-      </div>
-      <div class="admin-form-row">
-        <input id="fi-repo"  placeholder="Repo name" />
-        <input id="fi-url"   placeholder="URL" />
-      </div>
-      <div class="admin-form-row">
-        <select id="fi-lang">${LANGS.map(l=>`<option>${l}</option>`).join('')}</select>
-        <select id="fi-status">${statusCycle.map(s=>`<option value="${s}">${statusLabels[s]}</option>`).join('')}</select>
-        <button class="admin-btn-save"   id="fi-submit">Add</button>
+        <input id="fi-url" placeholder="Paste GitHub PR or issue URL" />
+        <button class="admin-btn-save"   id="fi-submit">Fetch &amp; Add</button>
         <button class="admin-btn-cancel" id="fi-cancel">Cancel</button>
       </div>
     </div>` : '';
@@ -921,16 +911,20 @@ function renderPanel(idx) {
     const form   = panel.querySelector('#admin-item-form');
     btnAdd.addEventListener('click', () => { form.style.display = form.style.display === 'none' ? 'block' : 'none'; });
     btnDel.addEventListener('click', () => deleteCompany(+btnDel.dataset.cidx));
-    panel.querySelector('#fi-submit').addEventListener('click', () => {
-      const label  = panel.querySelector('#fi-label').value.trim();
-      const title  = panel.querySelector('#fi-title').value.trim();
-      const repo   = panel.querySelector('#fi-repo').value.trim();
-      const url    = panel.querySelector('#fi-url').value.trim();
-      const lang   = panel.querySelector('#fi-lang').value;
-      const status = panel.querySelector('#fi-status').value;
-      if (!label || !title || !repo || !url) { showToast('Fill in all fields', true); return; }
-      companies[idx].items.push({ label, title, repo, status, url, lang });
-      pushData(); renderPanel(idx); renderGrid(); syncStats();
+    panel.querySelector('#fi-submit').addEventListener('click', async () => {
+      const rawUrl = panel.querySelector('#fi-url').value.trim();
+      const parsed = parseGitHubUrl(rawUrl);
+      if (!parsed) { showToast('Paste a valid github.com PR or issue URL', true); return; }
+      const btn = panel.querySelector('#fi-submit');
+      btn.textContent = 'Fetching...'; btn.disabled = true;
+      try {
+        const item = await fetchGitHubItem(parsed);
+        companies[idx].items.push(item);
+        pushData(); renderPanel(idx); renderGrid(); syncStats();
+      } catch(e) {
+        showToast('Fetch failed: ' + e.message, true);
+        btn.textContent = 'Fetch & Add'; btn.disabled = false;
+      }
     });
     panel.querySelector('#fi-cancel').addEventListener('click', () => { form.style.display = 'none'; });
   }
@@ -985,6 +979,37 @@ document.querySelectorAll('.pill').forEach(pill => {
     if (activeCompany !== null) renderPanel(activeCompany);
   });
 });
+
+/* ── ADMIN: GitHub helpers ── */
+function parseGitHubUrl(url) {
+  const m = url.match(/github\.com\/([^/]+)\/([^/]+)\/(pull|issues)\/(\d+)/);
+  return m ? { owner: m[1], repo: m[2], type: m[3], number: m[4] } : null;
+}
+
+async function fetchGitHubItem({ owner, repo, type, number }) {
+  const token = localStorage.getItem('oss-gh-token');
+  const headers = { Accept: 'application/vnd.github.v3+json' };
+  if (token) headers.Authorization = `token ${token}`;
+
+  const endpoint = type === 'pull' ? 'pulls' : 'issues';
+  const [item, repoInfo] = await Promise.all([
+    fetch(`https://api.github.com/repos/${owner}/${repo}/${endpoint}/${number}`, { headers }).then(r => r.json()),
+    fetch(`https://api.github.com/repos/${owner}/${repo}`, { headers }).then(r => r.json()),
+  ]);
+  if (item.message) throw new Error(item.message);
+
+  const label  = type === 'pull' ? `PR #${number}` : `#${number}`;
+  const title  = item.title;
+  const lang   = repoInfo.language || 'Other';
+  const url    = item.html_url;
+  let status;
+  if (type === 'pull') {
+    status = item.merged ? 'merged' : item.state === 'closed' ? 'closed' : 'open';
+  } else {
+    status = item.state === 'closed' ? 'closed' : 'claimed';
+  }
+  return { label, title, repo, status, url, lang };
+}
 
 /* ── ADMIN: GitHub API push ── */
 async function pushData() {
