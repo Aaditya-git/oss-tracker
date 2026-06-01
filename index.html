@@ -440,6 +440,8 @@
     .admin-panel-footer { display:flex; align-items:center; gap:8px; padding:12px 16px 4px; border-top:1px solid var(--border); }
     .admin-btn-add { cursor:pointer; font-size:0.78rem; font-weight:600; padding:6px 14px; border-radius:7px; border:1px solid rgba(139,92,246,0.5); background:rgba(139,92,246,0.12); color:var(--purple-l); font-family:var(--font); transition:background 0.15s; }
     .admin-btn-add:hover { background:rgba(139,92,246,0.22); }
+    .admin-btn-edit { cursor:pointer; font-size:0.78rem; font-weight:600; padding:6px 14px; border-radius:7px; border:1px solid rgba(251,191,36,0.4); background:rgba(251,191,36,0.08); color:#fbbf24; font-family:var(--font); transition:background 0.15s; }
+    .admin-btn-edit:hover { background:rgba(251,191,36,0.18); }
     .admin-btn-del { cursor:pointer; font-size:0.78rem; font-weight:600; padding:6px 14px; border-radius:7px; border:1px solid rgba(239,68,68,0.35); background:rgba(239,68,68,0.07); color:#f87171; font-family:var(--font); transition:background 0.15s; margin-left:auto; }
     .admin-btn-del:hover { background:rgba(239,68,68,0.18); }
     .admin-item-form { padding:14px 16px; border-top:1px solid var(--border); background:var(--card-l); display:flex; flex-direction:column; gap:8px; }
@@ -886,8 +888,20 @@ function renderPanel(idx) {
 
   const adminFooter = adminMode ? `
     <div class="admin-panel-footer">
-      <button class="admin-btn-add" id="btn-add-item" data-cidx="${idx}">+ Add contribution</button>
-      <button class="admin-btn-del" id="btn-del-company" data-cidx="${idx}">Delete company</button>
+      <button class="admin-btn-add"  id="btn-add-item"    data-cidx="${idx}">+ Add contribution</button>
+      <button class="admin-btn-edit" id="btn-edit-company" data-cidx="${idx}">Edit company</button>
+      <button class="admin-btn-del"  id="btn-del-company"  data-cidx="${idx}">Delete company</button>
+    </div>
+    <div class="admin-item-form" id="admin-edit-company-form" style="display:none">
+      <div class="admin-form-row">
+        <input id="ec-name"   value="${c.name}"   placeholder="Company name" />
+        <input id="ec-domain" value="${c.domain}" placeholder="Domain e.g. google.com" />
+      </div>
+      <div class="admin-form-row">
+        <input id="ec-repos"  value="${c.repos}"  placeholder="Repos, comma-separated" />
+        <button class="admin-btn-save"   id="ec-submit">Save</button>
+        <button class="admin-btn-cancel" id="ec-cancel">Cancel</button>
+      </div>
     </div>
     <div class="admin-item-form" id="admin-item-form" style="display:none">
       <div class="admin-form-row">
@@ -912,8 +926,20 @@ function renderPanel(idx) {
     const btnAdd = panel.querySelector('#btn-add-item');
     const btnDel = panel.querySelector('#btn-del-company');
     const form   = panel.querySelector('#admin-item-form');
-    btnAdd.addEventListener('click', () => { form.style.display = form.style.display === 'none' ? 'block' : 'none'; });
+    const btnEdit = panel.querySelector('#btn-edit-company');
+    const editForm = panel.querySelector('#admin-edit-company-form');
+    btnAdd.addEventListener('click', () => { form.style.display = form.style.display === 'none' ? 'block' : 'none'; editForm.style.display = 'none'; });
+    btnEdit.addEventListener('click', () => { editForm.style.display = editForm.style.display === 'none' ? 'block' : 'none'; form.style.display = 'none'; });
     btnDel.addEventListener('click', () => deleteCompany(+btnDel.dataset.cidx));
+    panel.querySelector('#ec-submit').addEventListener('click', () => {
+      const name   = panel.querySelector('#ec-name').value.trim();
+      const domain = panel.querySelector('#ec-domain').value.trim();
+      const repos  = panel.querySelector('#ec-repos').value.trim();
+      if (!name || !domain) { showToast('Name and domain are required', true); return; }
+      companies[idx].name = name; companies[idx].domain = domain; companies[idx].repos = repos;
+      pushData(); renderPanel(idx); renderGrid();
+    });
+    panel.querySelector('#ec-cancel').addEventListener('click', () => { editForm.style.display = 'none'; });
     panel.querySelector('#fi-submit').addEventListener('click', async () => {
       const rawUrl = panel.querySelector('#fi-url').value.trim();
       const parsed = parseGitHubUrl(rawUrl);
