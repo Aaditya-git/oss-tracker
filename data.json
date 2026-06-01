@@ -1,0 +1,83 @@
+[
+  {
+    "name": "Astronomer",
+    "domain": "astronomer.io",
+    "repos": "dag-factory, astronomer-cosmos, astro-cli",
+    "items": [
+      { "label": "PR #753",  "title": "Operator aliases in YAML configs",                          "repo": "dag-factory",       "status": "open",   "url": "https://github.com/astronomer/dag-factory/pull/753",       "lang": "Python" },
+      { "label": "PR #2734", "title": "Reduce build_airflow_graph complexity",                     "repo": "astronomer-cosmos", "status": "open",   "url": "https://github.com/astronomer/astronomer-cosmos/pull/2734", "lang": "Python" },
+      { "label": "PR #2747", "title": "Log redacted profile on cache miss",                        "repo": "astronomer-cosmos", "status": "open",   "url": "https://github.com/astronomer/astronomer-cosmos/pull/2747", "lang": "Python" },
+      { "label": "PR #2748", "title": "Extend Snowflake mappings: authenticator, host, port, CSK", "repo": "astronomer-cosmos", "status": "open",   "url": "https://github.com/astronomer/astronomer-cosmos/pull/2748", "lang": "Python" },
+      { "label": "PR #2735", "title": "Unify postgres profiles in dbt examples",                   "repo": "astronomer-cosmos", "status": "closed", "url": "https://github.com/astronomer/astronomer-cosmos/pull/2735", "lang": "Python" },
+      { "label": "PR #2159", "title": "Shared constants for dev mode strings",                     "repo": "astro-cli",         "status": "open",   "url": "https://github.com/astronomer/astro-cli/pull/2159",         "lang": "Go"     },
+      { "label": "PR #2160", "title": "Remove duplicate mock resets",                              "repo": "astro-cli",         "status": "open",   "url": "https://github.com/astronomer/astro-cli/pull/2160",         "lang": "Go"     }
+    ]
+  },
+  {
+    "name": "Tesla",
+    "domain": "tesla.com",
+    "repos": "fleet-telemetry",
+    "items": [
+      { "label": "PR #513", "title": "Document Kafka partition strategy and VIN-based message keys", "repo": "fleet-telemetry", "status": "open",    "url": "https://github.com/teslamotors/fleet-telemetry/pull/513",   "lang": "Go" },
+      { "label": "#273",    "title": "AWS SQS/SNS dispatcher",                                      "repo": "fleet-telemetry", "status": "claimed", "url": "https://github.com/teslamotors/fleet-telemetry/issues/273", "lang": "Go" }
+    ]
+  },
+  {
+    "name": "Airbyte",
+    "domain": "airbyte.com",
+    "repos": "airbyte",
+    "items": [
+      { "label": "#33874", "title": "Fix broken links in docs",           "repo": "airbyte", "status": "claimed", "url": "https://github.com/airbytehq/airbyte/issues/33874", "lang": "Python" },
+      { "label": "#44038", "title": "LinkedIn Ads: organizations stream", "repo": "airbyte", "status": "claimed", "url": "https://github.com/airbytehq/airbyte/issues/44038", "lang": "Python" }
+    ]
+  },
+  {
+    "name": "Trino",
+    "domain": "trino.io",
+    "repos": "trino",
+    "items": [
+      { "label": "#28765", "title": "Document truncate(number, position)", "repo": "trino", "status": "claimed", "url": "https://github.com/trinodb/trino/issues/28765", "lang": "Java" },
+      { "label": "#28687", "title": "Update default Cassandra to 4.x",    "repo": "trino", "status": "claimed", "url": "https://github.com/trinodb/trino/issues/28687", "lang": "Java" }
+    ]
+  },
+  {
+    "name": "Apache Iceberg",
+    "domain": "iceberg.apache.org",
+    "repos": "iceberg",
+    "items": [
+      { "label": "#15916", "title": "Clarify Spark branch write precedence docs", "repo": "iceberg", "status": "claimed", "url": "https://github.com/apache/iceberg/issues/15916", "lang": "Python" }
+    ]
+  },
+  {
+    "name": "Meltano",
+    "domain": "meltano.com",
+    "repos": "meltano",
+    "items": [
+      { "label": "#7327", "title": "Add json-schema-for-humans schema doc", "repo": "meltano", "status": "claimed", "url": "https://github.com/meltano/meltano/issues/7327", "lang": "Python" }
+    ]
+  },
+  {
+    "name": "Apache Beam",
+    "domain": "beam.apache.org",
+    "repos": "beam",
+    "items": [
+      { "label": "#35935", "title": "Update Python slowly updating side input", "repo": "beam", "status": "claimed", "url": "https://github.com/apache/beam/issues/35935", "lang": "Python" }
+    ]
+  },
+  {
+    "name": "Apache Airflow",
+    "domain": "airflow.apache.org",
+    "repos": "airflow",
+    "items": [
+      { "label": "#67336", "title": "Dashboard wrong % when state exceeds cap", "repo": "airflow", "status": "claimed", "url": "https://github.com/apache/airflow/issues/67336", "lang": "Python" }
+    ]
+  },
+  {
+    "name": "Kestra",
+    "domain": "kestra.io",
+    "repos": "kestra",
+    "items": [
+      { "label": "#15987", "title": "Log Kestra UI URL when server is ready", "repo": "kestra", "status": "claimed", "url": "https://github.com/kestra-io/kestra/issues/15987", "lang": "Java" }
+    ]
+  }
+]

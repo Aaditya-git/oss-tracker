@@ -432,9 +432,30 @@
     .no-items { padding: 20px; font-size: 0.85rem; color: var(--gray-l); text-align: center; }
     /* admin mode */
     #admin-indicator { display:none; align-items:center; padding:3px 9px; background:rgba(251,191,36,0.12); border:1px solid rgba(251,191,36,0.35); border-radius:6px; font-size:0.68rem; font-weight:700; color:#fbbf24; letter-spacing:0.08em; }
+    .contrib-admin { display:grid; grid-template-columns:10px 90px 1fr auto; align-items:center; gap:12px; padding:10px 16px; border-bottom:1px solid var(--border); outline:1px solid rgba(251,191,36,0.1); }
     .admin-cycle { cursor:pointer; font-size:0.7rem; font-weight:600; padding:3px 9px; border-radius:6px; border:1px solid rgba(251,191,36,0.45); background:rgba(251,191,36,0.1); color:#fbbf24; font-family:var(--font); white-space:nowrap; transition:background 0.15s; }
     .admin-cycle:hover { background:rgba(251,191,36,0.22); }
-    .contrib-admin { display:grid; grid-template-columns:10px 90px 1fr auto; align-items:center; gap:12px; padding:10px 16px; border-bottom:1px solid var(--border); outline:1px solid rgba(251,191,36,0.15); }
+    .admin-del-item { cursor:pointer; font-size:1rem; line-height:1; padding:2px 7px; border-radius:6px; border:1px solid rgba(239,68,68,0.35); background:rgba(239,68,68,0.08); color:#f87171; font-family:var(--font); transition:background 0.15s; }
+    .admin-del-item:hover { background:rgba(239,68,68,0.2); }
+    .admin-panel-footer { display:flex; align-items:center; gap:8px; padding:12px 16px 4px; border-top:1px solid var(--border); }
+    .admin-btn-add { cursor:pointer; font-size:0.78rem; font-weight:600; padding:6px 14px; border-radius:7px; border:1px solid rgba(139,92,246,0.5); background:rgba(139,92,246,0.12); color:var(--purple-l); font-family:var(--font); transition:background 0.15s; }
+    .admin-btn-add:hover { background:rgba(139,92,246,0.22); }
+    .admin-btn-del { cursor:pointer; font-size:0.78rem; font-weight:600; padding:6px 14px; border-radius:7px; border:1px solid rgba(239,68,68,0.35); background:rgba(239,68,68,0.07); color:#f87171; font-family:var(--font); transition:background 0.15s; margin-left:auto; }
+    .admin-btn-del:hover { background:rgba(239,68,68,0.18); }
+    .admin-item-form { padding:14px 16px; border-top:1px solid var(--border); background:var(--card-l); display:flex; flex-direction:column; gap:8px; }
+    .admin-form-row { display:flex; gap:8px; flex-wrap:wrap; }
+    .admin-form-row input, .admin-form-row select { flex:1; min-width:120px; background:var(--card); border:1px solid var(--border-l); border-radius:7px; color:var(--gray-ll); font-family:var(--font); font-size:0.8rem; padding:6px 10px; outline:none; }
+    .admin-form-row input:focus, .admin-form-row select:focus { border-color:var(--purple); }
+    .admin-btn-save { cursor:pointer; font-size:0.78rem; font-weight:600; padding:6px 14px; border-radius:7px; border:1px solid rgba(74,222,128,0.4); background:rgba(74,222,128,0.1); color:#4ade80; font-family:var(--font); white-space:nowrap; transition:background 0.15s; }
+    .admin-btn-save:hover { background:rgba(74,222,128,0.2); }
+    .admin-btn-cancel { cursor:pointer; font-size:0.78rem; font-weight:600; padding:6px 14px; border-radius:7px; border:1px solid var(--border); background:transparent; color:var(--gray-l); font-family:var(--font); transition:background 0.15s; }
+    .admin-btn-cancel:hover { background:var(--card-l); }
+    .co-card-add { display:flex; flex-direction:column; align-items:center; justify-content:center; gap:4px; cursor:pointer; border:1px dashed rgba(139,92,246,0.4) !important; opacity:0.7; transition:opacity 0.2s; }
+    .co-card-add:hover { opacity:1; }
+    .co-add-plus { font-size:1.6rem; color:var(--purple-l); line-height:1; }
+    .co-add-label { font-size:0.78rem; color:var(--gray-l); }
+    #admin-toast { position:fixed; bottom:28px; right:28px; padding:10px 18px; border-radius:10px; background:var(--card-l); border:1px solid var(--border-l); color:var(--gray-ll); font-size:0.82rem; font-family:var(--font); z-index:100; opacity:0; pointer-events:none; transition:opacity 0.3s; box-shadow:0 4px 24px rgba(0,0,0,0.35); }
+    #admin-toast.err { border-color:rgba(239,68,68,0.5); color:#f87171; }
 
     /* ════ CONTACT ════ */
     .contact-heading { font-size: 3rem; font-weight: 700; color: var(--white); letter-spacing: -0.04em; line-height: 1.1; margin-bottom: 14px; transition: color 0.4s; }
@@ -782,64 +803,37 @@
 })();
 
 /* ── CONTRIBUTIONS ── */
-const companies = [
-  { name:'Astronomer', domain:'astronomer.io', repos:'dag-factory, astronomer-cosmos, astro-cli', items:[
-    { label:'PR #753',  title:'Operator aliases in YAML configs',                          repo:'dag-factory',       status:'open',   url:'https://github.com/astronomer/dag-factory/pull/753',       lang:'Python' },
-    { label:'PR #2734', title:'Reduce build_airflow_graph complexity',                     repo:'astronomer-cosmos', status:'open',   url:'https://github.com/astronomer/astronomer-cosmos/pull/2734', lang:'Python' },
-    { label:'PR #2747', title:'Log redacted profile on cache miss',                        repo:'astronomer-cosmos', status:'open',   url:'https://github.com/astronomer/astronomer-cosmos/pull/2747', lang:'Python' },
-    { label:'PR #2748', title:'Extend Snowflake mappings: authenticator, host, port, CSK', repo:'astronomer-cosmos', status:'open',   url:'https://github.com/astronomer/astronomer-cosmos/pull/2748', lang:'Python' },
-    { label:'PR #2735', title:'Unify postgres profiles in dbt examples',                   repo:'astronomer-cosmos', status:'closed', url:'https://github.com/astronomer/astronomer-cosmos/pull/2735', lang:'Python' },
-    { label:'PR #2159', title:'Shared constants for dev mode strings',                     repo:'astro-cli',         status:'open',   url:'https://github.com/astronomer/astro-cli/pull/2159',          lang:'Go'     },
-    { label:'PR #2160', title:'Remove duplicate mock resets',                              repo:'astro-cli',         status:'open',   url:'https://github.com/astronomer/astro-cli/pull/2160',          lang:'Go'     },
-  ]},
-  { name:'Tesla', domain:'tesla.com', repos:'fleet-telemetry', items:[
-    { label:'PR #513', title:'Document Kafka partition strategy and VIN-based message keys', repo:'fleet-telemetry', status:'open',    url:'https://github.com/teslamotors/fleet-telemetry/pull/513',    lang:'Go' },
-    { label:'#273',    title:'AWS SQS/SNS dispatcher',                                      repo:'fleet-telemetry', status:'claimed', url:'https://github.com/teslamotors/fleet-telemetry/issues/273',  lang:'Go' },
-  ]},
-  { name:'Airbyte',      domain:'airbyte.com',        repos:'airbyte', items:[
-    { label:'#33874', title:'Fix broken links in docs',           repo:'airbyte', status:'claimed', url:'https://github.com/airbytehq/airbyte/issues/33874', lang:'Python' },
-    { label:'#44038', title:'LinkedIn Ads: organizations stream', repo:'airbyte', status:'claimed', url:'https://github.com/airbytehq/airbyte/issues/44038', lang:'Python' },
-  ]},
-  { name:'Trino',        domain:'trino.io',           repos:'trino', items:[
-    { label:'#28765', title:'Document truncate(number, position)', repo:'trino', status:'claimed', url:'https://github.com/trinodb/trino/issues/28765', lang:'Java' },
-    { label:'#28687', title:'Update default Cassandra to 4.x',    repo:'trino', status:'claimed', url:'https://github.com/trinodb/trino/issues/28687', lang:'Java' },
-  ]},
-  { name:'Apache Iceberg', domain:'iceberg.apache.org', repos:'iceberg', items:[
-    { label:'#15916', title:'Clarify Spark branch write precedence docs', repo:'iceberg', status:'claimed', url:'https://github.com/apache/iceberg/issues/15916', lang:'Python' },
-  ]},
-  { name:'Meltano',     domain:'meltano.com',         repos:'meltano', items:[
-    { label:'#7327', title:'Add json-schema-for-humans schema doc', repo:'meltano', status:'claimed', url:'https://github.com/meltano/meltano/issues/7327', lang:'Python' },
-  ]},
-  { name:'Apache Beam', domain:'beam.apache.org',     repos:'beam', items:[
-    { label:'#35935', title:'Update Python slowly updating side input', repo:'beam', status:'claimed', url:'https://github.com/apache/beam/issues/35935', lang:'Python' },
-  ]},
-  { name:'Apache Airflow', domain:'airflow.apache.org', repos:'airflow', items:[
-    { label:'#67336', title:'Dashboard wrong % when state exceeds cap', repo:'airflow', status:'claimed', url:'https://github.com/apache/airflow/issues/67336', lang:'Python' },
-  ]},
-  { name:'Kestra',      domain:'kestra.io',           repos:'kestra', items:[
-    { label:'#15987', title:'Log Kestra UI URL when server is ready', repo:'kestra', status:'claimed', url:'https://github.com/kestra-io/kestra/issues/15987', lang:'Java' },
-  ]},
-];
+let companies = [];
+const GH_OWNER = 'Aaditya-git', GH_REPO = 'oss-tracker', GH_FILE = 'data.json';
 
-const dotClass = { open:'s-open', claimed:'s-claimed', merged:'s-merged', closed:'s-closed' };
-const dotColor  = { open:'#4ade80', claimed:'#fbbf24', merged:'#a78bfa', closed:'#6b7280' };
+const dotClass     = { open:'s-open', claimed:'s-claimed', merged:'s-merged', closed:'s-closed' };
+const dotColor     = { open:'#4ade80', claimed:'#fbbf24', merged:'#a78bfa', closed:'#6b7280' };
 const statusLabels = { open:'Open', merged:'Merged', claimed:'Claimed', closed:'Closed' };
 const statusCycle  = ['open','merged','claimed','closed'];
+const LANGS        = ['Python','Go','Java','TypeScript','JavaScript','Rust','Scala','Other'];
 
 const grid  = document.getElementById('company-grid');
 const wrap  = document.getElementById('detail-wrap');
 const panel = document.getElementById('detail-panel');
-let activeFilter = 'all', activeCompany = null;
+let activeFilter = 'all', activeCompany = null, adminMode = false, adminKeyBuf = [];
 
 const faviconUrl    = d => `https://www.google.com/s2/favicons?domain=${d}&sz=32`;
 const matchesFilter = i => activeFilter === 'all' || i.status === activeFilter;
 
+function syncStats() {
+  const all = companies.flatMap(c => c.items);
+  document.getElementById('stat-prs').textContent       = all.filter(i => i.label.startsWith('PR') && i.status === 'open').length;
+  document.getElementById('stat-issues').textContent    = all.filter(i => i.status === 'claimed').length;
+  document.getElementById('stat-companies').textContent = companies.length;
+  document.getElementById('stat-repos').textContent     = new Set(all.map(i => i.repo)).size;
+}
+
 function renderGrid() {
   grid.innerHTML = '';
   companies.forEach((c, idx) => {
-    const visible = c.items.filter(matchesFilter);
+    const visible = adminMode ? c.items : c.items.filter(matchesFilter);
     const card = document.createElement('div');
-    card.className = 'co-card' + (activeCompany===idx?' active':'') + (visible.length===0?' dimmed':'');
+    card.className = 'co-card' + (activeCompany===idx?' active':'') + (!adminMode && visible.length===0?' dimmed':'');
     const dots = c.items.map(i=>`<span class="co-dot" style="background:${dotColor[i.status]}"></span>`).join('');
     card.innerHTML = `
       <div class="co-card-top">
@@ -850,14 +844,21 @@ function renderGrid() {
         <span class="co-count">${c.items.length} item${c.items.length!==1?'s':''}</span>
         <div class="co-dots">${dots}</div>
       </div>`;
-    if (visible.length > 0) card.addEventListener('click', () => toggleCompany(idx));
+    if (adminMode || visible.length > 0) card.addEventListener('click', () => toggleCompany(idx));
     grid.appendChild(card);
   });
+  if (adminMode) {
+    const addCard = document.createElement('div');
+    addCard.className = 'co-card co-card-add';
+    addCard.innerHTML = `<span class="co-add-plus">+</span><span class="co-add-label">Add Company</span>`;
+    addCard.addEventListener('click', showAddCompanyForm);
+    grid.appendChild(addCard);
+  }
 }
 
 function renderPanel(idx) {
   const c = companies[idx];
-  const visible = c.items.filter(matchesFilter);
+  const visible = adminMode ? c.items : c.items.filter(matchesFilter);
   const rows = visible.length === 0
     ? `<div class="no-items">No ${activeFilter} items.</div>`
     : visible.map(i => adminMode
@@ -867,7 +868,8 @@ function renderPanel(idx) {
              <span class="contrib-title">${i.title}</span>
              <span class="contrib-right">
                <span class="contrib-lang">${i.lang}</span>
-               <button class="admin-cycle" data-cidx="${idx}" data-label="${i.label}">${statusLabels[i.status]} ↺</button>
+               <button class="admin-cycle"    data-cidx="${idx}" data-label="${i.label}">${statusLabels[i.status]} ↺</button>
+               <button class="admin-del-item" data-cidx="${idx}" data-label="${i.label}" title="Delete">×</button>
              </span>
            </div>`
         : `<a class="contrib" href="${i.url}" target="_blank" rel="noopener">
@@ -879,17 +881,93 @@ function renderPanel(idx) {
                <span class="contrib-arrow">&#8599;</span>
              </span>
            </a>`).join('');
+
+  const adminFooter = adminMode ? `
+    <div class="admin-panel-footer">
+      <button class="admin-btn-add" id="btn-add-item" data-cidx="${idx}">+ Add contribution</button>
+      <button class="admin-btn-del" id="btn-del-company" data-cidx="${idx}">Delete company</button>
+    </div>
+    <div class="admin-item-form" id="admin-item-form" style="display:none">
+      <div class="admin-form-row">
+        <input id="fi-label" placeholder="Label  e.g. PR #123 or #456" />
+        <input id="fi-title" placeholder="Title" />
+      </div>
+      <div class="admin-form-row">
+        <input id="fi-repo"  placeholder="Repo name" />
+        <input id="fi-url"   placeholder="URL" />
+      </div>
+      <div class="admin-form-row">
+        <select id="fi-lang">${LANGS.map(l=>`<option>${l}</option>`).join('')}</select>
+        <select id="fi-status">${statusCycle.map(s=>`<option value="${s}">${statusLabels[s]}</option>`).join('')}</select>
+        <button class="admin-btn-save"   id="fi-submit">Add</button>
+        <button class="admin-btn-cancel" id="fi-cancel">Cancel</button>
+      </div>
+    </div>` : '';
+
   panel.innerHTML = `
     <div class="detail-head">
       <img class="detail-head-logo" src="${faviconUrl(c.domain)}" alt="${c.name}"/>
       <span class="detail-head-name">${c.name}</span>
       <span class="detail-head-repos">${c.repos}</span>
-    </div>${rows}`;
+    </div>${rows}${adminFooter}`;
+
   if (adminMode) {
-    panel.querySelectorAll('.admin-cycle').forEach(btn => {
-      btn.addEventListener('click', () => cycleItemStatus(+btn.dataset.cidx, btn.dataset.label));
+    panel.querySelectorAll('.admin-cycle').forEach(btn =>
+      btn.addEventListener('click', () => cycleItemStatus(+btn.dataset.cidx, btn.dataset.label)));
+    panel.querySelectorAll('.admin-del-item').forEach(btn =>
+      btn.addEventListener('click', () => deleteItem(+btn.dataset.cidx, btn.dataset.label)));
+    const btnAdd = panel.querySelector('#btn-add-item');
+    const btnDel = panel.querySelector('#btn-del-company');
+    const form   = panel.querySelector('#admin-item-form');
+    btnAdd.addEventListener('click', () => { form.style.display = form.style.display === 'none' ? 'block' : 'none'; });
+    btnDel.addEventListener('click', () => deleteCompany(+btnDel.dataset.cidx));
+    panel.querySelector('#fi-submit').addEventListener('click', () => {
+      const label  = panel.querySelector('#fi-label').value.trim();
+      const title  = panel.querySelector('#fi-title').value.trim();
+      const repo   = panel.querySelector('#fi-repo').value.trim();
+      const url    = panel.querySelector('#fi-url').value.trim();
+      const lang   = panel.querySelector('#fi-lang').value;
+      const status = panel.querySelector('#fi-status').value;
+      if (!label || !title || !repo || !url) { showToast('Fill in all fields', true); return; }
+      companies[idx].items.push({ label, title, repo, status, url, lang });
+      pushData(); renderPanel(idx); renderGrid(); syncStats();
     });
+    panel.querySelector('#fi-cancel').addEventListener('click', () => { form.style.display = 'none'; });
   }
+}
+
+function cycleItemStatus(cidx, label) {
+  const item = companies[cidx].items.find(i => i.label === label);
+  item.status = statusCycle[(statusCycle.indexOf(item.status) + 1) % statusCycle.length];
+  pushData(); renderPanel(cidx); renderGrid(); syncStats();
+}
+
+function deleteItem(cidx, label) {
+  companies[cidx].items = companies[cidx].items.filter(i => i.label !== label);
+  pushData(); renderPanel(cidx); renderGrid(); syncStats();
+}
+
+function deleteCompany(cidx) {
+  if (!confirm(`Delete "${companies[cidx].name}" and all its items?`)) return;
+  companies.splice(cidx, 1);
+  activeCompany = null;
+  wrap.classList.remove('open');
+  pushData(); renderGrid(); syncStats();
+}
+
+function showAddCompanyForm() {
+  const name   = prompt('Company name (e.g. Google):');
+  if (!name) return;
+  const domain = prompt('Domain (e.g. google.com):');
+  if (!domain) return;
+  const repos  = prompt('Repos, comma-separated (e.g. guava, grpc):');
+  if (!repos) return;
+  companies.push({ name: name.trim(), domain: domain.trim(), repos: repos.trim(), items: [] });
+  const newIdx = companies.length - 1;
+  pushData(); renderGrid();
+  activeCompany = newIdx;
+  renderPanel(newIdx);
+  wrap.classList.add('open');
 }
 
 function toggleCompany(idx) {
@@ -908,63 +986,59 @@ document.querySelectorAll('.pill').forEach(pill => {
   });
 });
 
-/* ════ ADMIN MODE ════
-   Secret: type the letter 'a' three times within 1 second.
-   A yellow ADMIN badge appears in the nav. Open any company card
-   and click the yellow status button on each row to cycle its status.
-   Changes are saved to localStorage and survive page refresh.
-*/
-const ADMIN_STORE = 'oss-status-overrides';
-let adminMode = false;
-let adminKeyBuf = [];
-
-(function applyOverrides() {
+/* ── ADMIN: GitHub API push ── */
+async function pushData() {
+  const token = localStorage.getItem('oss-gh-token');
+  if (!token) return;
+  showToast('Saving...');
   try {
-    const saved = JSON.parse(localStorage.getItem(ADMIN_STORE) || '{}');
-    companies.forEach(c => c.items.forEach(item => {
-      if (saved[item.label] !== undefined) item.status = saved[item.label];
-    }));
-    const all = companies.flatMap(c => c.items);
-    document.getElementById('stat-prs').dataset.target      = all.filter(i => i.label.startsWith('PR') && i.status === 'open').length;
-    document.getElementById('stat-issues').dataset.target   = all.filter(i => i.status === 'claimed').length;
-    document.getElementById('stat-companies').dataset.target = companies.length;
-    document.getElementById('stat-repos').dataset.target    = new Set(all.map(i => i.repo)).size;
-  } catch(e) {}
-})();
-
-function saveOverride(label, status) {
-  try {
-    const saved = JSON.parse(localStorage.getItem(ADMIN_STORE) || '{}');
-    saved[label] = status;
-    localStorage.setItem(ADMIN_STORE, JSON.stringify(saved));
-  } catch(e) {}
+    const apiUrl = `https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/contents/${GH_FILE}`;
+    const { sha } = await fetch(apiUrl, {
+      headers: { Authorization: `token ${token}`, Accept: 'application/vnd.github.v3+json' }
+    }).then(r => r.json());
+    const res = await fetch(apiUrl, {
+      method: 'PUT',
+      headers: { Authorization: `token ${token}`, Accept: 'application/vnd.github.v3+json', 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        message: 'update: contribution data',
+        content: btoa(unescape(encodeURIComponent(JSON.stringify(companies, null, 2)))),
+        sha
+      })
+    });
+    if (!res.ok) { const e = await res.json(); throw new Error(e.message || res.status); }
+    showToast('Saved. Live in ~60s.');
+  } catch(e) {
+    showToast('Save failed: ' + e.message, true);
+  }
 }
 
-function cycleItemStatus(cidx, label) {
-  const item = companies[cidx].items.find(i => i.label === label);
-  item.status = statusCycle[(statusCycle.indexOf(item.status) + 1) % statusCycle.length];
-  saveOverride(label, item.status);
-  renderPanel(cidx);
-  renderGrid();
-  syncStats();
-}
-
-function syncStats() {
-  const all = companies.flatMap(c => c.items);
-  document.getElementById('stat-prs').textContent      = all.filter(i => i.label.startsWith('PR') && i.status === 'open').length;
-  document.getElementById('stat-issues').textContent   = all.filter(i => i.status === 'claimed').length;
-  document.getElementById('stat-companies').textContent = companies.length;
-  document.getElementById('stat-repos').textContent    = new Set(all.map(i => i.repo)).size;
+function showToast(msg, isErr = false) {
+  let t = document.getElementById('admin-toast');
+  if (!t) { t = document.createElement('div'); t.id = 'admin-toast'; document.body.appendChild(t); }
+  t.textContent   = msg;
+  t.className     = 'admin-toast' + (isErr ? ' err' : '');
+  t.style.opacity = '1';
+  clearTimeout(t._to);
+  if (!isErr) t._to = setTimeout(() => { t.style.opacity = '0'; }, 3500);
 }
 
 function toggleAdminMode() {
+  if (!adminMode) {
+    let token = localStorage.getItem('oss-gh-token');
+    if (!token) {
+      token = prompt('Paste your GitHub token (stored only in this browser):');
+      if (!token) return;
+      localStorage.setItem('oss-gh-token', token.trim());
+    }
+  }
   adminMode = !adminMode;
   document.getElementById('admin-indicator').style.display = adminMode ? 'flex' : 'none';
+  renderGrid();
   if (activeCompany !== null) renderPanel(activeCompany);
 }
 
 document.addEventListener('keydown', e => {
-  if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+  if (['INPUT','TEXTAREA','SELECT'].includes(e.target.tagName)) return;
   const now = Date.now();
   adminKeyBuf.push({ key: e.key, t: now });
   adminKeyBuf = adminKeyBuf.filter(k => now - k.t < 1000);
@@ -974,7 +1048,21 @@ document.addEventListener('keydown', e => {
   }
 });
 
-renderGrid();
+/* init: load data from repo */
+fetch('./data.json?v=' + Date.now())
+  .then(r => r.json())
+  .then(data => {
+    companies = data;
+    const all = companies.flatMap(c => c.items);
+    document.getElementById('stat-prs').dataset.target       = all.filter(i => i.label.startsWith('PR') && i.status === 'open').length;
+    document.getElementById('stat-issues').dataset.target    = all.filter(i => i.status === 'claimed').length;
+    document.getElementById('stat-companies').dataset.target = companies.length;
+    document.getElementById('stat-repos').dataset.target     = new Set(all.map(i => i.repo)).size;
+    renderGrid();
+  })
+  .catch(() => {
+    grid.innerHTML = '<p style="padding:20px;color:var(--gray-l)">Could not load contribution data.</p>';
+  });
 
 /* active nav */
 const tnavLinks = document.querySelectorAll('.tnav-link');
