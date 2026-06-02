@@ -16,7 +16,7 @@
         "label": "PR #2734",
         "title": "Reduce build_airflow_graph complexity",
         "repo": "astronomer-cosmos",
-        "status": "claimed",
+        "status": "closed",
         "url": "https://github.com/astronomer/astronomer-cosmos/pull/2734",
         "lang": "Python"
       },
