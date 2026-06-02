@@ -205,5 +205,11 @@
         "lang": "Java"
       }
     ]
+  },
+  {
+    "name": "Google Cloud Platform",
+    "domain": "cloud.google.com",
+    "repos": "professional-services-data-validator",
+    "items": []
   }
 ]
