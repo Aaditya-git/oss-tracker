@@ -32,7 +32,7 @@
         "label": "PR #2748",
         "title": "Extend Snowflake mappings: authenticator, host, port, CSK",
         "repo": "astronomer-cosmos",
-        "status": "open",
+        "status": "merged",
         "url": "https://github.com/astronomer/astronomer-cosmos/pull/2748",
         "lang": "Python"
       },
