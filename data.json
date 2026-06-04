@@ -215,7 +215,7 @@
         "label": "PR #1747",
         "title": "fix: expand hash/concat wildcards in YAML validation path",
         "repo": "professional-services-data-validator",
-        "status": "merged",
+        "status": "claimed",
         "url": "https://github.com/GoogleCloudPlatform/professional-services-data-validator/pull/1747",
         "lang": "Python"
       }
