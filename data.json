@@ -117,7 +117,7 @@
         "label": "#28765",
         "title": "Document truncate(number, position)",
         "repo": "trino",
-        "status": "claimed",
+        "status": "closed",
         "url": "https://github.com/trinodb/trino/issues/28765",
         "lang": "Java"
       },
